@@ -188,31 +188,43 @@ export default function Cadastro() {
         <>
             <form className="d-flex justify-content-center align-items-center flex-fill"
                 onSubmit={handleSubmit}>
-                <div className="my-auto p-4 col-12 col-sm-8 col-md-6 col-lg-5 col-xl-8 card rounded-1">
+                <div className="my-auto p-4 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-7 rounded-1">
+                    <h1>Criar nova conta</h1>
                     <div className="row g-2">
-                        <div className="form-floating mb-3 col-6">
-                            <input type="email" className="form-control" id="InputNome"
-                                name="email"
-                                placeholder='Email'
+                        <div className="mb-sm-3 col-12 col-sm-5">
+                            <input type="text" className="form-control" id="InputNome"
+                                name="nome"
                             />
-                            <label for="InputNome" className="form-label">Nome</label>
+                            <label htmlFor="InputNome" className="form-label">Nome</label>
                         </div>
-                        <div className="form-floating mb-3 col-4">
+                        <div className="mb-sm-3 col-12 col-sm-3">
                             <input type="date" className="form-control" id="InputNascimento"
-                                name="password"
-                                placeholder='Senha'
+                                name="nascimento"
                             />
-                            <label for="InputNascimento" className="form-label">Data de Nascimento</label>
+                            <label htmlFor="InputNascimento" className="form-label">Data de nascimento</label>
+                        </div>
+                        <div className="mb-sm-3 col-12 col-sm-4 ">
+                            <input type="text" className="form-control" id="InputCpf"
+                                name="telefone"
+                                value={cpf}
+                                onChange={handleCpfChange}
+                            />
+                            <label for="InputCpf" className="form-label">CPF</label>
                         </div>
 
                     </div>
-                    <div className="row g-2">
-                        <div className="form-floating mb-3 col-6">
+                    <div className='row g-2'>
+                        <div className="mb-sm-3 col-12 col-sm-5">
+                            <input type="text" className="form-control" id="InputNomeMaterno"
+                                name="nomeMaterno"
+                            />
+                            <label htmlFor="InputNomeMaterno" className="form-label">Nome materno</label>
+                        </div>
+                        <div className="mb-sm-3 col-12 col-sm-6">
                             <select type="select" className="form-control" id="InputGenero"
-                                name="password"
-                                placeholder='Senha'
+                                name="genero"
                             >
-                                <option disabled value="" selected></option>
+                                <option disabled value="" selected>Gênero</option>
                                 {listaGeneros.map((genero, index) => (
                                     <option key={index} value={genero.toLowerCase()}>
                                         {genero}
@@ -222,11 +234,11 @@ export default function Cadastro() {
                             <label for="InputGenero" className="form-label">Gênero</label>
                         </div>
                     </div>
-                    <div className="row g-2">
-                        <div className="form-floating mb-3 col-3">
+
+                    <div className='row g-2'>
+                        <div className="mb-sm-3 col-12 col-sm-3">
                             <input type="text" className="form-control " id="InputCelular"
                                 name="celular"
-                                placeholder='Celular'
                                 maxLength={15}
                                 value={celular}
                                 onChange={handleCelularChange}
@@ -235,57 +247,84 @@ export default function Cadastro() {
                             <label for="InputCelular" className="form-label">Celular</label>
                         </div>
 
-
-                        <div className="form-floating mb-3 col-3 ">
+                        <div className="mb-sm-3 col-12 col-sm-3 ">
                             <input type="text" className="form-control" id="InputTelefone"
                                 name="telefone"
-                                placeholder='Telefone'
                                 value={telefone}
                                 onChange={handleTelefoneChange}
 
                             />
                             <label for="InputTelefone" className="form-label">Telefone</label>
                         </div>
-
-                        <div className="form-floating mb-3 col-3 ">
-                            <input type="text" className="form-control" id="InputCpf"
-                                name="telefone"
-                                placeholder='CPF'
-                                value={cpf}
-                                onChange={handleCpfChange}
+                    </div>
+                    <div className='row g-2'>
+                        <div className="mb-sm-3 col-12 col-sm-2">
+                            <input type="text" className="form-control" id="InputCep"
+                                name="cep"
                             />
-                            <label for="InputCpf" className="form-label">CPF</label>
+                            <label htmlFor="InputCep" className="form-label">CEP</label>
+                        </div>
+                        <div className="mb-sm-3 col-12 col-sm-6">
+                            <input type="text" className="form-control" id="InputLogradouro"
+                                name="logradouro"
+                            />
+                            <label htmlFor="InputLogradouro" className="form-label">Logradouro</label>
+                        </div>
+                        <div className="mb-sm-3 col-12 col-sm-2">
+                            <input type="text" className="form-control" id="InputNumero"
+                                name="numero"
+                            />
+                            <label htmlFor="InputNumero" className="form-label">Número</label>
+                        </div>
+                        <div className="mb-sm-3 col-12 col-sm-2">
+                            <input type="text" className="form-control" id="InputComplemento"
+                                name="complemento"
+                            />
+                            <label htmlFor="InputComplemento" className="form-label">Complemento</label>
+                        </div>
+                    </div>
+                    <div className='row g-2'>
+                        <div className="mb-sm-3 col-12 col-sm-4">
+                            <input type="text" className="form-control" id="InputBairro" name="bairro" />
+                            <label htmlFor="InputBairro" className="form-label">Bairro</label>
+                        </div>
+
+                        <div className="mb-sm-3 col-12 col-sm-4">
+                            <input type="text" className="form-control" id="InputCidade" name="cidade" />
+                            <label htmlFor="InputCidade" className="form-label">Cidade</label>
+                        </div>
+
+                        <div className="mb-sm-3 col-12 col-sm-4">
+                            <input type="text" className="form-control" id="InputEstado" name="estado" />
+                            <label htmlFor="InputEstado" className="form-label">Estado</label>
                         </div>
 
                     </div>
                     <div className='row g-2'>
-                        <div className="form-floating mb-3">
-                            <input type="password" className="form-control" id="InputEndereco"
-                                name="password"
-                                placeholder='Endereço'
+                        <div className="mb-sm-3 col-12 col-sm-4">
+                            <input type="text" className="form-control" id="InputLogin"
+                                name="login"
                             />
-                            <label for="InputEndereco" className="form-label">Endereço</label>
+                        <label for="InputLogin" className="form-label">Login</label>
                         </div>
-
-                    </div>
-                    <div className='row g-2'>
-                        <div className="form-floating mb-3 col-6">
+         
+                 
+                        <div className="mb-sm-3 col-12 col-sm-4">
                             <input type="password" className="form-control" id="InputSenha"
                                 name="password"
-                                placeholder='Confirmar senha'
                             />
                             <label for="InputSenha" className="form-label">Senha</label>
                         </div>
-                        <div className="form-floating mb-3 col-6">
+                        <div className="mb-sm-3 col-12 col-sm-4">
                             <input type="password" className="form-control" id="InputConfirmaSenha"
                                 name="password"
-                                placeholder='Confirmar senha'
 
                             />
                             <label for="InputConfirmaSenha" className="form-label">Confirmar senha</label>
+
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-lg btn-outline-primary rounded-2 w-100">Entrar</button>
+                    <button type="submit" className="btn btn-outline-primary rounded-2 w-100">Cadastrar</button>
                 </div>
             </form>
         </>
