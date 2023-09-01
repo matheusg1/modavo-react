@@ -224,7 +224,7 @@ export default function Cadastro() {
                             <select type="select" className="form-control" id="InputGenero"
                                 name="genero"
                             >
-                                <option disabled value="" selected>Gênero</option>
+                                <option disabled value="" selected>Selecione</option>
                                 {listaGeneros.map((genero, index) => (
                                     <option key={index} value={genero.toLowerCase()}>
                                         {genero}

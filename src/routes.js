@@ -6,13 +6,13 @@ import Login from './pages/login';
 
 export default function AppRoutes() {
     return (
-        <Router>
+        
             <Routes>
                 <Route path="*" element={<Navigate to="/" replace />} />
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
             </Routes>
-        </Router>
+        
     )
 }
