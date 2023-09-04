@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 export default function Cadastro() {
 
     const listaGeneros = [
@@ -107,8 +107,15 @@ export default function Cadastro() {
         "Zulher/Zenina"
     ]
     const [celular, setCelular] = useState('');
+    const [nome, setNome] = useState('');
+
+
     const [telefone, setTelefone] = useState('')
     const [cpf, setCpf] = useState('')
+
+    const [validacaoNome, setValidacaoNome] = useState('')
+
+
 
     const handleCelularChange = (event) => {
         const input = event.target.value;
@@ -141,6 +148,7 @@ export default function Cadastro() {
         const formattedInput = formatCpf(input);
         setCpf(formattedInput);
     };
+
 
     const formatCpf = (input) => {
         const cleanedInput = input.replace(/\D/g, '');
@@ -177,25 +185,70 @@ export default function Cadastro() {
         return formattedInput;
     };
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log('teclka')
-        console.log(telefone)
-        console.log(celular)
-    }
+    /*
+        function handleSubmit(e) {
+            e.preventDefault();
+            validarNome(nome)
+            console.log(nome)
+        }
+    */
+
+    function validarNome(nome) {
+        if (nome.length > 14 && nome.length) {
+            setValidacaoNome("O nome deve ter no mínimo 15 caracteres e no máximo 60 caracteres.");
+            return false;
+        }
+        var regex = /\d/;
+        if (regex.test(nome)) {
+            return false;//setValidacaoNome("Não pode haver caracteres numéricos")
+        }
+        return true;
+    };
+
+    useEffect(() => {
+        const form = document.querySelector('.needs-validation');
+
+        form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()
+                || !validarNome(nome)) {
+                console.log(nome)
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+        }, false);
+    }, []);
 
     return (
         <>
-            <form className="d-flex justify-content-center align-items-center flex-fill"
-                onSubmit={handleSubmit}>
+            <form className="d-flex justify-content-center align-items-center flex-fill needs-validation" noValidate
+            >
                 <div className="my-auto p-4 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-7 rounded-1">
                     <h1>Criar nova conta</h1>
+                    <div class="col-md-4">
+                        <label for="validationCustomUsername" class="form-label">Username</label>
+
+                        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required />
+                        <div class="invalid-feedback">
+                            Please choose a username.
+
+                        </div>
+                    </div>
                     <div className="row g-2">
                         <div className="mb-sm-3 col-12 col-sm-5">
                             <input type="text" className="form-control" id="InputNome"
                                 name="nome"
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
                             />
                             <label htmlFor="InputNome" className="form-label">Nome</label>
+                            <div class="invalid-feedback">
+                                {validacaoNome}sdasdasda
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-3">
                             <input type="date" className="form-control" id="InputNascimento"
@@ -209,7 +262,8 @@ export default function Cadastro() {
                                 value={cpf}
                                 onChange={handleCpfChange}
                             />
-                            <label for="InputCpf" className="form-label">CPF</label>
+                            <p className='text-danger m-0 p-0'></p>
+                            <label for="InputCpf" className="form-label m-0 p-0">CPF</label>
                         </div>
 
                     </div>
@@ -305,10 +359,10 @@ export default function Cadastro() {
                             <input type="text" className="form-control" id="InputLogin"
                                 name="login"
                             />
-                        <label for="InputLogin" className="form-label">Login</label>
+                            <label for="InputLogin" className="form-label">Login</label>
                         </div>
-         
-                 
+
+
                         <div className="mb-sm-3 col-12 col-sm-4">
                             <input type="password" className="form-control" id="InputSenha"
                                 name="password"
