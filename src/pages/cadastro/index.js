@@ -108,14 +108,10 @@ export default function Cadastro() {
     ]
     const [celular, setCelular] = useState('');
     const [nome, setNome] = useState('');
-
-
     const [telefone, setTelefone] = useState('')
     const [cpf, setCpf] = useState('')
 
     const [validacaoNome, setValidacaoNome] = useState('')
-
-
 
     const handleCelularChange = (event) => {
         const input = event.target.value;
@@ -165,11 +161,7 @@ export default function Cadastro() {
         }
         return formattedInput;
     };
-    /*
-        function cleanNumero(numero) {
-            return numero.replace(/[\(\)-]/g, '');
-        }
-    */
+
     const formatTelefone = (input) => {
         const cleanedInput = input.replace(/\D/g, '');
         let formattedInput = '';
@@ -185,33 +177,22 @@ export default function Cadastro() {
         return formattedInput;
     };
 
-    /*
-        function handleSubmit(e) {
-            e.preventDefault();
-            validarNome(nome)
-            console.log(nome)
-        }
-    */
-
-    function validarNome(nome) {
-        if (nome.length > 14 && nome.length) {
-            setValidacaoNome("O nome deve ter no mínimo 15 caracteres e no máximo 60 caracteres.");
-            return false;
-        }
-        var regex = /\d/;
-        if (regex.test(nome)) {
-            return false;//setValidacaoNome("Não pode haver caracteres numéricos")
-        }
-        return true;
-    };
 
     useEffect(() => {
         const form = document.querySelector('.needs-validation');
 
         form.addEventListener('submit', (event) => {
-            if (!form.checkValidity()
-                || !validarNome(nome)) {
-                console.log(nome)
+            event.preventDefault();
+            console.log(nome)            
+            if (nome.length < 3) {
+                document.getElementById('InputNome').setCustomValidity('Nome deve ter pelo menos 3 caracteres.');
+                setValidacaoNome('Nome deve ter pelo menos 3 caracteres.');
+            } else {
+                document.getElementById('InputNome').setCustomValidity('');
+                setValidacaoNome(''); // Limpar mensagem de erro personalizada
+            }
+
+            if (!form.checkValidity()) {
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -220,7 +201,9 @@ export default function Cadastro() {
         }, false);
     }, []);
 
+
     return (
+
         <>
             <form className="d-flex justify-content-center align-items-center flex-fill needs-validation" noValidate
             >
@@ -237,10 +220,9 @@ export default function Cadastro() {
                     </div>
                     <div className="row g-2">
                         <div className="mb-sm-3 col-12 col-sm-5">
-                            <input type="text" className="form-control" id="InputNome"
-                                name="nome"
-                                value={nome}
-                                onChange={(e) => setNome(e.target.value)}
+                            <input type="text" className="form-control " id="InputNome"
+                                name="nome"                                
+                                value={nome}                                
                             />
                             <label htmlFor="InputNome" className="form-label">Nome</label>
                             <div class="invalid-feedback">

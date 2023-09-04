@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link } from "react-router-dom";
+import imgLogo from '../../img/logo.svg'
 
-export default function Navbar() {    
+export default function Navbar() {
     const [checked, setChecked] = useState(false);
 
     const handleChange = (event) => {
@@ -17,7 +18,7 @@ export default function Navbar() {
         let element = document.body;
 
         if (localDarkMode == undefined || localDarkMode == 'light') {
-            element.dataset.bsTheme = 'light';        
+            element.dataset.bsTheme = 'light';
             setChecked(true);
         }
         if (localDarkMode == 'dark') {
@@ -26,22 +27,24 @@ export default function Navbar() {
         }
     },)
 
-
     return (
-        <nav className="navbar navbar-expand-sm bg-body-tertiary">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">Navbar</a>
+        <nav className="navbar navbar-expand-sm bg-body-tertiary border-bottom border-primary border-2 shadow">
+            <div className="container-fluid fw-semibold">
+                <a class="navbar-brand" href="#">
+                    <img src={imgLogo} alt="Logo" width="50" height="50" class="d-inline-block align-text-middle"/>
+                        Integra
+                </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className="collapse navbar-collapse fw-medium" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/cadastro">Cadastrar</Link>
-                        </li>              
+                        </li>
                     </ul>
                     <div className="d-flex me-sm-2">
                         <span className="me-2" >☾</span>
