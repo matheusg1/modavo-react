@@ -9,3 +9,10 @@ body {
 .navbar-brand {
     font-family: 'Expletus Sans', cursive;
 }
+
+.texto-validacao{    
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: var(--bs-form-invalid-color);
+}

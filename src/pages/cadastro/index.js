@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import EnderecoInputs from '../../components/Endereco';
 export default function Cadastro() {
 
     const listaGeneros = [
@@ -106,24 +107,40 @@ export default function Cadastro() {
         "Zomem/Zenino",
         "Zulher/Zenina"
     ]
-    const [celular, setCelular] = useState('');
-    const [nome, setNome] = useState('');
-    const [telefone, setTelefone] = useState('')
-    const [cpf, setCpf] = useState('')
+    const [dadosPessoais, setDadosPessoais] = useState({
+        nome: '',
+        celular: '',
+        telefone: '',
+        cpf: '',
+        cep: '',
+        logradouro: '',
+        numero: '',
+        complemento: '',
+        login : '',
+        senha: '',
+        confirmaSenha: '',
+    })
+    const [validacoes, setValidacoes] = useState({
+        nome: '',
+        celular: '',
+        telefone: '',
+        cpf: '',
+        cep: '',
+        logradouro: '',
+        numero: '',
+        complemento: '',
+        login: '',
+        senha: '',
+        confirmaSenha: '',
+    })
 
-    const [validacaoNome, setValidacaoNome] = useState('')
 
-    const handleCelularChange = (event) => {
-        const input = event.target.value;
-        const formattedInput = formatCelular(input);
-        setCelular(formattedInput);
-    };
+    const campoObrigatorio = "Preencha o campo";
 
-    const handleTelefoneChange = (event) => {
-        const input = event.target.value;
-        const formattedInput = formatTelefone(input);
-        setTelefone(formattedInput);
-    };
+    const handleChangeNascimento = (event) => {
+        console.log(event.target.value);
+        //Validações p/ datas futuras
+    }
 
     const formatCelular = (input) => {
         const cleanedInput = input.replace(/\D/g, '');
@@ -139,12 +156,28 @@ export default function Cadastro() {
         return formattedInput;
     };
 
-    const handleCpfChange = (event) => {
-        const input = event.target.value;
+    const handleChangeNome = (e) => {
+
+        setDadosPessoais({ ...dadosPessoais, nome: e.target.value });
+    }
+
+    const handleChangeCpf = (e) => {
+        const input = e.target.value;
         const formattedInput = formatCpf(input);
-        setCpf(formattedInput);
+        setDadosPessoais({ ...dadosPessoais, cpf: formattedInput });
     };
 
+    const handleChangeCelular = (e) => {
+        const input = e.target.value;
+        const formattedInput = formatCelular(input);
+        setDadosPessoais({ ...dadosPessoais, celular: formattedInput });
+    };
+
+    const handleChangeTelefone = (e) => {
+        const input = e.target.value;
+        const formattedInput = formatTelefone(input);
+        setDadosPessoais({ ...dadosPessoais, telefone: formattedInput });
+    };
 
     const formatCpf = (input) => {
         const cleanedInput = input.replace(/\D/g, '');
@@ -178,86 +211,139 @@ export default function Cadastro() {
     };
 
 
-    useEffect(() => {
-        const form = document.querySelector('.needs-validation');
+    const handleChangeNomeMaterno = (e) => {
+        setDadosPessoais({ ...dadosPessoais, nomeMaterno: e.target.value });
+    }
 
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            console.log(nome)            
-            if (nome.length < 3) {
-                document.getElementById('InputNome').setCustomValidity('Nome deve ter pelo menos 3 caracteres.');
-                setValidacaoNome('Nome deve ter pelo menos 3 caracteres.');
-            } else {
-                document.getElementById('InputNome').setCustomValidity('');
-                setValidacaoNome(''); // Limpar mensagem de erro personalizada
-            }
+    const handleChangeLogin = (e) => {
+        setDadosPessoais({ ...dadosPessoais, login: e.target.value });
+        console.log(dadosPessoais.login)
+    }
 
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+    const handleChangeSenha = (e) => {
+        setDadosPessoais({ ...dadosPessoais, senha: e.target.value });
+    }
 
-            form.classList.add('was-validated');
-        }, false);
-    }, []);
+    const handleConfirmaSenha = (e) => {
+        setDadosPessoais({ ...dadosPessoais, confirmaSenha: e.target.value });
+    }
+    
+    const validaSenha = () => {
+        if (contemNumeroOuCaractereEspecial(dadosPessoais.senha)) {            
+            setValidacoes({ ...validacoes, senha: 'Senha deve ter apenas letras' });
+        }
+        else if(dadosPessoais.senha.length != 8){
+            console.log(dadosPessoais.senha.length)
+            setValidacoes({ ...validacoes, senha: 'Senha deve ter 8 caracteres' });            
+        }
+        else{
+            setValidacoes({ ...validacoes, senha: '' });
+        }
+    }
+
+    const validaConfirmaSenha = () => {
+        if(dadosPessoais.senha != dadosPessoais.confirmaSenha){    
+            setValidacoes({ ...validacoes, confirmaSenha: 'Senhas diferentes.' });            
+        }
+        else{
+            setValidacoes({ ...validacoes, confirmaSenha: '' });            
+        }    
+    }
+    
+    const validaLogin = () => {
+        if(contemNumeroOuCaractereEspecial(dadosPessoais.login)){
+            setValidacoes({ ...validacoes, login: 'Login deve ter apenas letras' });             
+        }
+        else if(dadosPessoais.login.length != 6){
+            setValidacoes({ ...validacoes, login: 'Login deve ter 6 letras' });             
+        }
+        else{
+            setValidacoes({ ...validacoes, login: '' }); 
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    const contemNumeroOuCaractereEspecial = (str) => {
+        const regex = /[0-9!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/;
+        return regex.test(str);
+    };
+
+    const validaNome = () => {
+        if (dadosPessoais.nome.length < 14 || dadosPessoais.nome.length > 59) {
+            setValidacoes({ ...validacoes, nome: 'Nome deve conter de 15 a 60 letras.' });
+        } else if (contemNumeroOuCaractereEspecial(dadosPessoais.nome)) {
+            setValidacoes({ ...validacoes, nome: 'Nome deve conter apenas letras.' });
+        } else {
+            setValidacoes({ ...validacoes, nome: '' });
+        }
+    };
+
+
+    const validaNomeMaterno = () => {
+        if (contemNumeroOuCaractereEspecial(dadosPessoais.nomeMaterno)) {
+            setValidacoes({ ...validacoes, nomeMaterno: 'O nome deve conter apenas letras.' });
+        } else {
+            setValidacoes({ ...validacoes, nomeMaterno: '' });
+        }
+    };
 
 
     return (
-
         <>
-            <form className="d-flex justify-content-center align-items-center flex-fill needs-validation" noValidate
-            >
+            <form className="d-flex justify-content-center align-items-center flex-fill"
+                onSubmit={handleSubmit}>
                 <div className="my-auto p-4 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-7 rounded-1">
-                    <h1>Criar nova conta</h1>
-                    <div class="col-md-4">
-                        <label for="validationCustomUsername" class="form-label">Username</label>
-
-                        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required />
-                        <div class="invalid-feedback">
-                            Please choose a username.
-
-                        </div>
-                    </div>
+                    <h2 className='my-4'>Criar nova conta</h2>
                     <div className="row g-2">
                         <div className="mb-sm-3 col-12 col-sm-5">
-                            <input type="text" className="form-control " id="InputNome"
-                                name="nome"                                
-                                value={nome}                                
+                            <label htmlFor="inputNome" className="form-label">Nome</label>
+                            <input type="text" className="form-control " id="inputNome"
+                                name="nome"
+                                onChange={handleChangeNome}
+                                onBlur={() => validaNome()}
                             />
-                            <label htmlFor="InputNome" className="form-label">Nome</label>
-                            <div class="invalid-feedback">
-                                {validacaoNome}sdasdasda
-                            </div>
-                            <div class="valid-feedback">
-                                Looks good!
+                            <div class="texto-validacao">
+                                {validacoes.nome}
                             </div>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-3">
-                            <input type="date" className="form-control" id="InputNascimento"
+                            <label htmlFor="inputNascimento" className="form-label">Nascimento</label>
+                            <input type="date" className="form-control" id="inputNascimento"
                                 name="nascimento"
+                                onChange={handleChangeNascimento}
                             />
-                            <label htmlFor="InputNascimento" className="form-label">Data de nascimento</label>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-4 ">
-                            <input type="text" className="form-control" id="InputCpf"
-                                name="telefone"
-                                value={cpf}
-                                onChange={handleCpfChange}
+                            <label for="inputCpf" className="form-label">CPF</label>
+                            <input type="text" className="form-control" id="inputCpf"
+                                name="cpf"
+                                value={dadosPessoais.cpf}
+                                onChange={handleChangeCpf}
                             />
-                            <p className='text-danger m-0 p-0'></p>
-                            <label for="InputCpf" className="form-label m-0 p-0">CPF</label>
+                            <div class="texto-validacao">
+                                {validacoes.cpf}
+                            </div>
                         </div>
-
                     </div>
                     <div className='row g-2'>
                         <div className="mb-sm-3 col-12 col-sm-5">
-                            <input type="text" className="form-control" id="InputNomeMaterno"
+                            <label htmlFor="inputNomeMaterno" className="form-label">Nome materno</label>
+                            <input type="text" className="form-control" id="inputNomeMaterno"
                                 name="nomeMaterno"
+                                tabIndex={0}
+                                onChange={handleChangeNomeMaterno}
+                                onBlur={() => validaNomeMaterno()}
                             />
-                            <label htmlFor="InputNomeMaterno" className="form-label">Nome materno</label>
+                            <div class="texto-validacao">
+                                {validacoes.nomeMaterno}
+                            </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-6">
-                            <select type="select" className="form-control" id="InputGenero"
+                        <div className="mb-sm-3 col-12 col-sm-6 col-xl-7">
+                            <label for="inputGenero" className="form-label">Gênero</label>
+                            <select type="select" className="form-control" id="inputGenero"
                                 name="genero"
                             >
                                 <option disabled value="" selected>Selecione</option>
@@ -267,97 +353,107 @@ export default function Cadastro() {
                                     </option>
                                 ))}
                             </select>
-                            <label for="InputGenero" className="form-label">Gênero</label>
                         </div>
                     </div>
 
                     <div className='row g-2'>
                         <div className="mb-sm-3 col-12 col-sm-3">
-                            <input type="text" className="form-control " id="InputCelular"
+                            <label for="inputCelular" className="form-label">Celular</label>
+                            <input type="text" className="form-control " id="inputCelular"
                                 name="celular"
                                 maxLength={15}
-                                value={celular}
-                                onChange={handleCelularChange}
-
+                                value={dadosPessoais.celular}
+                                onChange={handleChangeCelular}
                             />
-                            <label for="InputCelular" className="form-label">Celular</label>
                         </div>
 
                         <div className="mb-sm-3 col-12 col-sm-3 ">
-                            <input type="text" className="form-control" id="InputTelefone"
+                            <label for="inputTelefone" className="form-label">Telefone</label>
+                            <input type="text" className="form-control" id="inputTelefone"
                                 name="telefone"
-                                value={telefone}
-                                onChange={handleTelefoneChange}
+                                value={dadosPessoais.telefone}
+                                onChange={handleChangeTelefone}
 
                             />
-                            <label for="InputTelefone" className="form-label">Telefone</label>
                         </div>
                     </div>
                     <div className='row g-2'>
                         <div className="mb-sm-3 col-12 col-sm-2">
-                            <input type="text" className="form-control" id="InputCep"
+                            <label htmlFor="inputCep" className="form-label">CEP</label>
+                            <input type="text" className="form-control" id="inputCep"
+                                maxlength={9}
                                 name="cep"
                             />
-                            <label htmlFor="InputCep" className="form-label">CEP</label>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-6">
-                            <input type="text" className="form-control" id="InputLogradouro"
+                            <label htmlFor="inputLogradouro" className="form-label">Logradouro</label>
+                            <input type="text" className="form-control" id="inputLogradouro"
                                 name="logradouro"
                             />
-                            <label htmlFor="InputLogradouro" className="form-label">Logradouro</label>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-2">
-                            <input type="text" className="form-control" id="InputNumero"
+                            <label htmlFor="inputNumero" className="form-label">Número</label>
+                            <input type="text" className="form-control" id="inputNumero"
                                 name="numero"
                             />
-                            <label htmlFor="InputNumero" className="form-label">Número</label>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-2">
-                            <input type="text" className="form-control" id="InputComplemento"
+                            <label htmlFor="inputComplemento" className="form-label">Complemento</label>
+                            <input type="text" className="form-control" id="inputComplemento"
                                 name="complemento"
                             />
-                            <label htmlFor="InputComplemento" className="form-label">Complemento</label>
                         </div>
                     </div>
                     <div className='row g-2'>
                         <div className="mb-sm-3 col-12 col-sm-4">
-                            <input type="text" className="form-control" id="InputBairro" name="bairro" />
-                            <label htmlFor="InputBairro" className="form-label">Bairro</label>
+                            <label htmlFor="inputBairro" className="form-label">Bairro</label>
+                            <input type="text" className="form-control" id="inputBairro" name="bairro" />
                         </div>
 
                         <div className="mb-sm-3 col-12 col-sm-4">
-                            <input type="text" className="form-control" id="InputCidade" name="cidade" />
-                            <label htmlFor="InputCidade" className="form-label">Cidade</label>
+                            <label htmlFor="inputCidade" className="form-label">Cidade</label>
+                            <input type="text" className="form-control" id="inputCidade" name="cidade" />
                         </div>
 
                         <div className="mb-sm-3 col-12 col-sm-4">
-                            <input type="text" className="form-control" id="InputEstado" name="estado" />
-                            <label htmlFor="InputEstado" className="form-label">Estado</label>
+                            <label htmlFor="inputEstado" className="form-label">Estado</label>
+                            <input type="text" className="form-control" id="inputEstado" name="estado" />
                         </div>
 
                     </div>
                     <div className='row g-2'>
                         <div className="mb-sm-3 col-12 col-sm-4">
-                            <input type="text" className="form-control" id="InputLogin"
+                            <label for="inputLogin" className="form-label">Login</label>
+                            <input type="text" className="form-control" id="inputLogin"
                                 name="login"
+                                onChange={handleChangeLogin}
+                                onBlur={() => validaLogin()}
                             />
-                            <label for="InputLogin" className="form-label">Login</label>
-                        </div>
-
-
-                        <div className="mb-sm-3 col-12 col-sm-4">
-                            <input type="password" className="form-control" id="InputSenha"
-                                name="password"
-                            />
-                            <label for="InputSenha" className="form-label">Senha</label>
+                            <div class="texto-validacao">
+                                {validacoes.login}
+                            </div>
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-4">
-                            <input type="password" className="form-control" id="InputConfirmaSenha"
+                            <label for="inputSenha" className="form-label">Senha</label>
+                            <input type="password" className="form-control" id="inputSenha"
                                 name="password"
-
+                                onChange={handleChangeSenha}
+                                onBlur={() => validaSenha()}
                             />
-                            <label for="InputConfirmaSenha" className="form-label">Confirmar senha</label>
-
+                            <div class="texto-validacao">
+                                {validacoes.senha}
+                            </div>
+                        </div>
+                        <div className="mb-sm-3 col-12 col-sm-4">
+                            <label for="inputConfirmaSenha" className="form-label">Confirmar senha</label>
+                            <input type="password" className="form-control" id="inputConfirmaSenha"
+                                name="repassword"
+                                onChange={handleConfirmaSenha}
+                                onBlur={() => validaConfirmaSenha()}
+                            />
+                            <div class="texto-validacao">
+                                {validacoes.confirmaSenha}
+                            </div>
                         </div>
                     </div>
                     <button type="submit" className="btn btn-outline-primary rounded-2 w-100">Cadastrar</button>
