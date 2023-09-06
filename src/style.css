@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
+:root {
+    --azul: #0400ff;
+    --vermelho: #e60518;
+    --branco: #F8F8FF;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -10,9 +15,21 @@ body {
     font-family: 'Expletus Sans', cursive;
 }
 
-.texto-validacao{    
+.texto-validacao {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
     color: var(--bs-form-invalid-color);
+}
+
+.navbar-custom {
+    border-bottom: .5px solid var(--vermelho);
+}
+
+body[data-bs-theme="light"]{
+    background-color: var(--branco);
+}
+
+body[data-bs-theme="dark"] .navbar-custom {
+    border-color: var(--azul);
 }

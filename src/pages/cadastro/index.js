@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import EnderecoInputs from '../../components/Endereco';
+import {
+    cpfEhValido,
+    contemNumeroOuCaractereEspecial,
+    formataCpf,
+    formataCelular,
+    formataTelefone
+} from '../../services'
+
 export default function Cadastro() {
 
     const listaGeneros = [
@@ -116,10 +123,11 @@ export default function Cadastro() {
         logradouro: '',
         numero: '',
         complemento: '',
-        login : '',
+        login: '',
         senha: '',
         confirmaSenha: '',
     })
+
     const [validacoes, setValidacoes] = useState({
         nome: '',
         celular: '',
@@ -134,82 +142,33 @@ export default function Cadastro() {
         confirmaSenha: '',
     })
 
+    const mensagemCampoObrigatorio = "Preencha o campo";
 
-    const campoObrigatorio = "Preencha o campo";
-
-    const handleChangeNascimento = (event) => {
-        console.log(event.target.value);
-        //Validações p/ datas futuras
+    const handleChangeNascimento = (e) => {
+        setDadosPessoais({ ...dadosPessoais, nascimento: e.target.value });
     }
 
-    const formatCelular = (input) => {
-        const cleanedInput = input.replace(/\D/g, '');
-        let formattedInput = '';
-
-        if (cleanedInput.length <= 2) {
-            formattedInput = cleanedInput;
-        } else if (cleanedInput.length <= 7) {
-            formattedInput = `(${cleanedInput.slice(0, 2)}) ${cleanedInput.slice(2)}`;
-        } else {
-            formattedInput = `(${cleanedInput.slice(0, 2)}) ${cleanedInput.slice(2, 7)}-${cleanedInput.slice(7, 11)}`;
-        }
-        return formattedInput;
-    };
-
     const handleChangeNome = (e) => {
-
         setDadosPessoais({ ...dadosPessoais, nome: e.target.value });
     }
 
     const handleChangeCpf = (e) => {
-        const input = e.target.value;
-        const formattedInput = formatCpf(input);
-        setDadosPessoais({ ...dadosPessoais, cpf: formattedInput });
+        const cpf = e.target.value;
+        const cpfFormatado = formataCpf(cpf);
+        setDadosPessoais({ ...dadosPessoais, cpf: cpfFormatado });
     };
 
     const handleChangeCelular = (e) => {
-        const input = e.target.value;
-        const formattedInput = formatCelular(input);
-        setDadosPessoais({ ...dadosPessoais, celular: formattedInput });
+        const celular = e.target.value;
+        const celularFormatado = formataCelular(celular);
+        setDadosPessoais({ ...dadosPessoais, celular: celularFormatado });
     };
 
     const handleChangeTelefone = (e) => {
-        const input = e.target.value;
-        const formattedInput = formatTelefone(input);
-        setDadosPessoais({ ...dadosPessoais, telefone: formattedInput });
+        const telefone = e.target.value;
+        const telefoneFormatado = formataTelefone(telefone);
+        setDadosPessoais({ ...dadosPessoais, telefone: telefoneFormatado });
     };
-
-    const formatCpf = (input) => {
-        const cleanedInput = input.replace(/\D/g, '');
-        let formattedInput = '';
-
-        if (cleanedInput.length <= 3) {
-            formattedInput = cleanedInput;
-        } else if (cleanedInput.length <= 6) {
-            formattedInput = `${cleanedInput.slice(0, 3)}.${cleanedInput.slice(3)}`;
-        } else if (cleanedInput.length <= 9) {
-            formattedInput = `${cleanedInput.slice(0, 3)}.${cleanedInput.slice(3, 6)}.${cleanedInput.slice(6)}`;
-        } else {
-            formattedInput = `${cleanedInput.slice(0, 3)}.${cleanedInput.slice(3, 6)}.${cleanedInput.slice(6, 9)}-${cleanedInput.slice(9, 11)}`;
-        }
-        return formattedInput;
-    };
-
-    const formatTelefone = (input) => {
-        const cleanedInput = input.replace(/\D/g, '');
-        let formattedInput = '';
-
-        if (cleanedInput.length <= 2) {
-            formattedInput = cleanedInput;
-        } else if (cleanedInput.length <= 6) {
-            formattedInput = `(${cleanedInput.slice(0, 2)}) ${cleanedInput.slice(2)}`;
-        } else {
-            formattedInput = `(${cleanedInput.slice(0, 2)}) ${cleanedInput.slice(2, 6)}-${cleanedInput.slice(6, 10)}`;
-        }
-
-        return formattedInput;
-    };
-
 
     const handleChangeNomeMaterno = (e) => {
         setDadosPessoais({ ...dadosPessoais, nomeMaterno: e.target.value });
@@ -217,7 +176,6 @@ export default function Cadastro() {
 
     const handleChangeLogin = (e) => {
         setDadosPessoais({ ...dadosPessoais, login: e.target.value });
-        console.log(dadosPessoais.login)
     }
 
     const handleChangeSenha = (e) => {
@@ -227,49 +185,6 @@ export default function Cadastro() {
     const handleConfirmaSenha = (e) => {
         setDadosPessoais({ ...dadosPessoais, confirmaSenha: e.target.value });
     }
-    
-    const validaSenha = () => {
-        if (contemNumeroOuCaractereEspecial(dadosPessoais.senha)) {            
-            setValidacoes({ ...validacoes, senha: 'Senha deve ter apenas letras' });
-        }
-        else if(dadosPessoais.senha.length != 8){
-            console.log(dadosPessoais.senha.length)
-            setValidacoes({ ...validacoes, senha: 'Senha deve ter 8 caracteres' });            
-        }
-        else{
-            setValidacoes({ ...validacoes, senha: '' });
-        }
-    }
-
-    const validaConfirmaSenha = () => {
-        if(dadosPessoais.senha != dadosPessoais.confirmaSenha){    
-            setValidacoes({ ...validacoes, confirmaSenha: 'Senhas diferentes.' });            
-        }
-        else{
-            setValidacoes({ ...validacoes, confirmaSenha: '' });            
-        }    
-    }
-    
-    const validaLogin = () => {
-        if(contemNumeroOuCaractereEspecial(dadosPessoais.login)){
-            setValidacoes({ ...validacoes, login: 'Login deve ter apenas letras' });             
-        }
-        else if(dadosPessoais.login.length != 6){
-            setValidacoes({ ...validacoes, login: 'Login deve ter 6 letras' });             
-        }
-        else{
-            setValidacoes({ ...validacoes, login: '' }); 
-        }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
-
-    const contemNumeroOuCaractereEspecial = (str) => {
-        const regex = /[0-9!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/;
-        return regex.test(str);
-    };
 
     const validaNome = () => {
         if (dadosPessoais.nome.length < 14 || dadosPessoais.nome.length > 59) {
@@ -281,14 +196,75 @@ export default function Cadastro() {
         }
     };
 
-
     const validaNomeMaterno = () => {
-        if (contemNumeroOuCaractereEspecial(dadosPessoais.nomeMaterno)) {
+        if (!dadosPessoais.nomeMaterno) {
+            setValidacoes({ ...validacoes, nomeMaterno: mensagemCampoObrigatorio });
+        }
+        else if (contemNumeroOuCaractereEspecial(dadosPessoais.nomeMaterno)) {
             setValidacoes({ ...validacoes, nomeMaterno: 'O nome deve conter apenas letras.' });
         } else {
             setValidacoes({ ...validacoes, nomeMaterno: '' });
         }
     };
+
+    const validaCpf = () => {
+        if ((dadosPessoais.cpf == "")) {
+            setValidacoes({ ...validacoes, cpf: mensagemCampoObrigatorio });
+        }
+        else if (!cpfEhValido(dadosPessoais.cpf)) {
+            setValidacoes({ ...validacoes, cpf: 'CPF inválido' });
+        }
+        else {
+            setValidacoes({ ...validacoes, cpf: '' });
+        }
+    }
+
+    const validaLogin = () => {
+        if (!dadosPessoais.login) {
+            setValidacoes({ ...validacoes, login: mensagemCampoObrigatorio });
+        }
+        else if (contemNumeroOuCaractereEspecial(dadosPessoais.login)) {
+            setValidacoes({ ...validacoes, login: 'Login deve ter apenas letras' });
+        }
+        else if (dadosPessoais.login.length != 6) {
+            setValidacoes({ ...validacoes, login: 'Login deve ter 6 letras' });
+        }
+        else {
+            setValidacoes({ ...validacoes, login: '' });
+        }
+    }
+
+    const validaSenha = () => {
+        if (!dadosPessoais.senha) {
+            setValidacoes({ ...validacoes, senha: mensagemCampoObrigatorio });
+        }
+        else if (contemNumeroOuCaractereEspecial(dadosPessoais.senha)) {
+            setValidacoes({ ...validacoes, senha: 'Senha deve ter apenas letras' });
+        }
+        else if (dadosPessoais.senha.length != 8) {
+            console.log(dadosPessoais.senha.length)
+            setValidacoes({ ...validacoes, senha: 'Senha deve ter 8 caracteres' });
+        }
+        else {
+            setValidacoes({ ...validacoes, senha: '' });
+        }
+    }
+
+    const validaConfirmaSenha = () => {
+        if (!dadosPessoais.confirmaSenha) {
+            setValidacoes({ ...validacoes, confirmaSenha: mensagemCampoObrigatorio });
+        }
+        else if (dadosPessoais.senha != dadosPessoais.confirmaSenha) {
+            setValidacoes({ ...validacoes, confirmaSenha: 'Senhas diferentes.' });
+        }
+        else {
+            setValidacoes({ ...validacoes, confirmaSenha: '' });
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
 
     return (
@@ -296,7 +272,8 @@ export default function Cadastro() {
             <form className="d-flex justify-content-center align-items-center flex-fill"
                 onSubmit={handleSubmit}>
                 <div className="my-auto p-4 col-12 col-sm-12 col-md-10 col-lg-8 col-xl-7 rounded-1">
-                    <h2 className='my-4'>Criar nova conta</h2>
+                    <h2 className='fs-1 mt-2 mb-4 d-none d-sm-block'>Criar nova conta</h2>
+                    <h2 className='fs-1 mt-3 text-center d-block d-sm-none'>Criar nova conta</h2>
                     <div className="row g-2">
                         <div className="mb-sm-3 col-12 col-sm-5">
                             <label htmlFor="inputNome" className="form-label">Nome</label>
@@ -322,6 +299,7 @@ export default function Cadastro() {
                                 name="cpf"
                                 value={dadosPessoais.cpf}
                                 onChange={handleChangeCpf}
+                                onBlur={() => validaCpf()}
                             />
                             <div class="texto-validacao">
                                 {validacoes.cpf}

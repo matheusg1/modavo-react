@@ -28,17 +28,17 @@ export default function Navbar() {
     },)
 
     return (
-        <nav className="navbar navbar-expand-sm bg-body-tertiary border-bottom border-primary border-2 shadow">
+        <nav className="navbar navbar-expand-sm bg-body-tertiary navbar-custom">
             <div className="container-fluid fw-semibold">
-                <a class="navbar-brand" href="#">
-                    <img src={imgLogo} alt="Logo" width="50" height="50" class="d-inline-block align-text-middle"/>
-                        Integra
+                <a class="navbar-brand nav-link" href="#">
+                    <img src={imgLogo} alt="Logo" width="34" class="d-inline-block mt-0 align-bottom"/>
+                    Integra
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse fw-medium" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav me-auto">
                         <li className="nav-item">
                             <Link className="nav-link" to="/login">Login</Link>
                         </li>
