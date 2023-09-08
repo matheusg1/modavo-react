@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import {
     cpfEhValido,
     contemNumeroOuCaractereEspecial,
     formataCpf,
     formataCelular,
-    formataTelefone
+    formataTelefone,
+    formataCep,
 } from '../../services'
 
 export default function Cadastro() {
@@ -123,6 +125,7 @@ export default function Cadastro() {
         logradouro: '',
         numero: '',
         complemento: '',
+        bairro: '',
         login: '',
         senha: '',
         confirmaSenha: '',
@@ -137,6 +140,7 @@ export default function Cadastro() {
         logradouro: '',
         numero: '',
         complemento: '',
+        bairro: '',
         login: '',
         senha: '',
         confirmaSenha: '',
@@ -173,6 +177,64 @@ export default function Cadastro() {
     const handleChangeNomeMaterno = (e) => {
         setDadosPessoais({ ...dadosPessoais, nomeMaterno: e.target.value });
     }
+
+    const handleChangeCep = (e) => {
+        const cep = e.target.value;
+        const cepFormatado = formataCep(cep);
+        setDadosPessoais({ ...dadosPessoais, cep: cepFormatado });
+    }
+
+    function buscaEndereco(cep) {
+        if (cep.length < 9) return;
+        const viaCepUrl = `https://viacep.com.br/ws/${cep}/json/`;
+
+        axios.get(viaCepUrl)
+            .then(response => {
+                if (response.status === 200) {
+                    const data = response.data;
+
+                    setDadosPessoais({
+                        ...dadosPessoais,
+                        cep: data.cep,
+                        logradouro: data.logradouro,
+                        cidade: data.localidade,
+                        estado: data.uf,
+                        bairro: data.bairro,
+                        
+                    });                    
+                    return;
+                } else {
+                    return;
+                }
+            })
+            .catch(error => {
+                return;
+            });
+    }
+    const handleChangeNumero = (e) =>{
+        setDadosPessoais({ ...dadosPessoais, numero: e.target.value });        
+    }
+
+    const handleChangeComplemento = (e) =>{
+        setDadosPessoais({ ...dadosPessoais, complemento: e.target.value });        
+    }
+
+    const handleChangeLogradouro = (e) =>{
+        setDadosPessoais({ ...dadosPessoais, logradouro: e.target.value });        
+    }
+
+    const handleChangeBairro = (e) =>{
+        setDadosPessoais({ ...dadosPessoais, bairro: e.target.value });        
+    }
+
+    const handleChangeCidade = (e) =>{
+        setDadosPessoais({ ...dadosPessoais, cidade: e.target.value });        
+    }
+
+    const handleChangeEstado = (e) =>{
+        setDadosPessoais({ ...dadosPessoais, estado: e.target.value });        
+    }
+    
 
     const handleChangeLogin = (e) => {
         setDadosPessoais({ ...dadosPessoais, login: e.target.value });
@@ -264,6 +326,7 @@ export default function Cadastro() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(dadosPessoais)
     }
 
 
@@ -351,7 +414,6 @@ export default function Cadastro() {
                                 name="telefone"
                                 value={dadosPessoais.telefone}
                                 onChange={handleChangeTelefone}
-
                             />
                         </div>
                     </div>
@@ -361,41 +423,59 @@ export default function Cadastro() {
                             <input type="text" className="form-control" id="inputCep"
                                 maxlength={9}
                                 name="cep"
+                                value={dadosPessoais.cep}
+                                onChange={handleChangeCep}
+                                onBlur={() => buscaEndereco(dadosPessoais.cep)}
                             />
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-6">
                             <label htmlFor="inputLogradouro" className="form-label">Logradouro</label>
                             <input type="text" className="form-control" id="inputLogradouro"
                                 name="logradouro"
+                                value={dadosPessoais.logradouro}
+                                onChange={handleChangeLogradouro}
                             />
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-2">
                             <label htmlFor="inputNumero" className="form-label">Número</label>
                             <input type="text" className="form-control" id="inputNumero"
                                 name="numero"
+                                value={dadosPessoais.numero}
+                                onChange={handleChangeNumero}
                             />
                         </div>
                         <div className="mb-sm-3 col-12 col-sm-2">
                             <label htmlFor="inputComplemento" className="form-label">Complemento</label>
                             <input type="text" className="form-control" id="inputComplemento"
                                 name="complemento"
+                                value={dadosPessoais.complemento}
+                                onChange={handleChangeComplemento}
                             />
                         </div>
                     </div>
                     <div className='row g-2'>
                         <div className="mb-sm-3 col-12 col-sm-4">
                             <label htmlFor="inputBairro" className="form-label">Bairro</label>
-                            <input type="text" className="form-control" id="inputBairro" name="bairro" />
+                            <input type="text" className="form-control" id="inputBairro" name="bairro"
+                                value={dadosPessoais.bairro}
+                                onChange={handleChangeBairro}
+                                />
                         </div>
 
                         <div className="mb-sm-3 col-12 col-sm-4">
                             <label htmlFor="inputCidade" className="form-label">Cidade</label>
-                            <input type="text" className="form-control" id="inputCidade" name="cidade" />
+                            <input type="text" className="form-control" id="inputCidade" name="cidade"
+                                value={dadosPessoais.cidade}
+                                onChange={handleChangeCidade}
+                                />
                         </div>
 
                         <div className="mb-sm-3 col-12 col-sm-4">
                             <label htmlFor="inputEstado" className="form-label">Estado</label>
-                            <input type="text" className="form-control" id="inputEstado" name="estado" />
+                            <input type="text" className="form-control" id="inputEstado" name="estado"
+                                value={dadosPessoais.estado}
+                                onChange={handleChangeEstado}
+                                />
                         </div>
 
                     </div>

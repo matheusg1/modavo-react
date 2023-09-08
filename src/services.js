@@ -1,16 +1,36 @@
 import react from 'react';
+import axios from 'axios';
 
+export function buscaEndereco(cep) {
+    if (cep.length < 9) return;
+    const viaCepUrl = `https://viacep.com.br/ws/${cep}/json/`;
 
+    axios.get(viaCepUrl)
+        .then(response => {
+            if (response.status === 200) {
+                const data = response.data;
+                               
+                    console.log(`Bairro: ${data.bairro}`);                                  
+                
+                return data.json();
+            } else {
+                console.log('Não foi possível encontrar as informações para este CEP.');
+                return;
+            }
+        })
+        .catch(error => {
+            console.log('Retornou null');
+            return null;
+        });
+}
 
 //Criado por chatGPT
 export function cpfEhValido(cpf) {
-    cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+    cpf = cpf.replace(/[^\d]/g, '');
     if (cpf.length !== 11) return false;
 
-    // Verifica se todos os dígitos são iguais, o que torna o CPF inválido
     if (/^(\d)\1+$/.test(cpf)) return false;
 
-    // Calcula o primeiro dígito verificador
     let sum = 0;
     for (let i = 0; i < 9; i++) {
         sum += parseInt(cpf.charAt(i)) * (10 - i);
@@ -18,7 +38,6 @@ export function cpfEhValido(cpf) {
     let digit1 = 11 - (sum % 11);
     if (digit1 === 10 || digit1 === 11) digit1 = 0;
 
-    // Calcula o segundo dígito verificador
     sum = 0;
     for (let i = 0; i < 10; i++) {
         sum += parseInt(cpf.charAt(i)) * (11 - i);
@@ -26,7 +45,6 @@ export function cpfEhValido(cpf) {
     let digit2 = 11 - (sum % 11);
     if (digit2 === 10 || digit2 === 11) digit2 = 0;
 
-    // Verifica se os dígitos calculados coincidem com os dígitos informados
     if (parseInt(cpf.charAt(9)) === digit1 && parseInt(cpf.charAt(10)) === digit2) {
         return true;
     } else {
@@ -78,6 +96,17 @@ export const formataTelefone = (input) => {
 
     return formattedInput;
 };
+
+export const formataCep = (input) => {
+    const cleanedInput = input.replace(/\D/g, '');
+
+    if (cleanedInput.length > 5) {
+        return `${cleanedInput.slice(0, 5)}-${cleanedInput.slice(5)}`;
+    };
+
+    return cleanedInput;
+};
+
 
 export const contemNumeroOuCaractereEspecial = (str) => {
     const regex = /[0-9!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/;
