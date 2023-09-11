@@ -107,7 +107,6 @@ export const formataCep = (input) => {
     return cleanedInput;
 };
 
-
 export const contemNumeroOuCaractereEspecial = (str) => {
     const regex = /[0-9!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/;
     return regex.test(str);
