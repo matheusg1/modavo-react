@@ -162,7 +162,26 @@ export default function Cadastro() {
         confirmaSenha: '',
     })
 
+    const [cadastrarDisabled, setcadastrarDisabled] = useState(true);
+
     const mensagemCampoObrigatorio = "Preencha o campo";
+
+    useEffect(() => {
+        // Verifique o estado de inputValue e defina o estado de outputValue com base nele.
+
+        for(let validacao in validacoes){
+            if(validacoes[validacao]){
+                console.log('cadastrar true');
+                setcadastrarDisabled(true);
+            }
+            else{
+                console.log('cadastrar false');
+                setcadastrarDisabled(false);
+            }
+        }        
+      }, [validacoes]);
+    
+
 
     const handleChangeNascimento = (e) => {
         setDadosPessoais({ ...dadosPessoais, nascimento: e.target.value });
@@ -429,6 +448,12 @@ export default function Cadastro() {
         }
     }
 
+    const usuarioExistente = (u) => {
+        const users = JSON.parse(localStorage.getItem('usuarios')) || null;        
+        return u in users;
+    }
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -447,26 +472,42 @@ export default function Cadastro() {
             confirmaSenha: '',
         }
 
+        let userValido;
+
         for (const propriedade in dadosPessoais) {
             if (dadosPessoais[propriedade].length == 0) {
-                novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };
-            } else {
-
+                novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };        
+            } else {    
                 novaValidacao = { ...novaValidacao, [propriedade]: '' };
             }
-        }
-        setValidacoes(novaValidacao);
-/*
-        let listaUsuarios;
 
-        if (!localStorage.getItem("usuarios")) {
-            listaUsuarios = [dadosPessoais]; // Inicializa a lista com dadosPessoais
-            localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
-            console.log('Lista de usuários vazia');
-        } else {
-            listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
-            console.log('Lista de usuários preenchida');
-        }*/
+        }
+
+        setValidacoes(novaValidacao);
+
+        for(let validacao in validacoes){
+            if(validacoes[validacao] != ''){
+                console.log(validacao);
+                userValido = false;
+                console.log('user invalido');
+                break;
+            }
+            else{
+                console.log('user VALIDO');
+                userValido = true;
+            }
+        }
+
+        if (userValido &&!usuarioExistente(dadosPessoais.login)) {
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || null;
+            usuarios[dadosPessoais.login] = dadosPessoais;
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+        }
+        else {
+            console.log('Login já existente');
+            return;
+        }
 
         // Adiciona dadosPessoais à lista de usuários
         //listaUsuarios.push(dadosPessoais);
@@ -486,7 +527,7 @@ export default function Cadastro() {
                 <div className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-10 col-xxl-11">
                     <h2 className='fs-1 mt-2 mb-4 d-none d-sm-block'>Criar nova conta</h2>
                     <h2 className='fs-1 mt-3 text-center d-block d-sm-none'>Criar nova conta</h2>
-                    <div class="input-group">
+                    <div className="input-group">
                         <div className="mb-sm-3 col-12 col-sm-5 col-xl-3 px-1">
                             <label htmlFor="inputNome" className="form-label">Nome</label>
                             <input type="text" className="form-control " id="inputNome"
@@ -494,7 +535,7 @@ export default function Cadastro() {
                                 onChange={handleChangeNome}
                                 onBlur={() => validaNome()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.nome}
                             </div>
                         </div>
@@ -505,7 +546,7 @@ export default function Cadastro() {
                                 onChange={handleChangeNascimento}
                                 onBlur={validaNascimento}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.nascimento}
                             </div>
                         </div>
@@ -517,7 +558,7 @@ export default function Cadastro() {
                                 onChange={handleChangeCpf}
                                 onBlur={() => validaCpf()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.cpf}
                             </div>
                         </div>
@@ -530,7 +571,7 @@ export default function Cadastro() {
                                 onChange={handleChangeNomeMaterno}
                                 onBlur={() => validaNomeMaterno()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.nomeMaterno}
                             </div>
                         </div>
@@ -548,7 +589,7 @@ export default function Cadastro() {
                                     </option>
                                 ))}
                             </select>
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.genero}
                             </div>
                         </div>
@@ -562,7 +603,7 @@ export default function Cadastro() {
                                 onChange={handleChangeCelular}
                                 onBlur={() => validaCelular()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.celular}
                             </div>
                         </div>
@@ -575,7 +616,7 @@ export default function Cadastro() {
                                 onChange={handleChangeTelefone}
                                 onBlur={() => validaTelefone()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.telefone}
                             </div>
                         </div>
@@ -589,7 +630,7 @@ export default function Cadastro() {
                                 onChange={handleChangeCep}
                                 onBlur={() => buscaEndereco(dadosPessoais.cep)}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.cep}
                             </div>
                         </div>
@@ -601,7 +642,7 @@ export default function Cadastro() {
                                 onChange={handleChangeCidade}
                                 onBlur={() => validaCidade()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.cidade}
                             </div>
                         </div>
@@ -620,7 +661,7 @@ export default function Cadastro() {
                                     </option>
                                 ))}
                             </select>
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.estado}
                             </div>
                         </div>
@@ -634,7 +675,7 @@ export default function Cadastro() {
                                 onChange={handleChangeLogradouro}
                                 onBlur={() => validaLogradouro()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.logradouro}
                             </div>
                         </div>
@@ -646,7 +687,7 @@ export default function Cadastro() {
                                 onChange={handleChangeNumero}
                                 onBlur={() => validaNumero()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.numero}
                             </div>
                         </div>
@@ -658,7 +699,7 @@ export default function Cadastro() {
                                 onChange={handleChangeComplemento}
                                 onBlur={() => validaComplemento()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.complemento}
                             </div>
                         </div>
@@ -669,12 +710,12 @@ export default function Cadastro() {
                                 onChange={handleChangeBairro}
                                 onBlur={() => validaBairro()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.bairro}
                             </div>
                         </div>
                     </div>
-                    <div class="input-group">
+                    <div className="input-group">
                         <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-1">
                             <label for="inputLogin" className="form-label">Login</label>
                             <input type="text" className="form-control" id="inputLogin"
@@ -682,7 +723,7 @@ export default function Cadastro() {
                                 onChange={handleChangeLogin}
                                 onBlur={() => validaLogin()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.login}
                             </div>
                         </div>
@@ -693,7 +734,7 @@ export default function Cadastro() {
                                 onChange={handleChangeSenha}
                                 onBlur={() => validaSenha()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.senha}
                             </div>
                         </div>
@@ -704,13 +745,13 @@ export default function Cadastro() {
                                 onChange={handleChangeConfirmaSenha}
                                 onBlur={() => validaConfirmaSenha()}
                             />
-                            <div class="texto-validacao">
+                            <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.confirmaSenha}
                             </div>
                         </div>
                     </div>
                     <div className='text-center'>
-                        <button type="submit" class="btn btn-outline-primary w-75 align-self-center">Cadastrar</button>
+                        <button type="submit" className="btn btn-outline-primary w-75 align-self-center" disabled={cadastrarDisabled}>Cadastrar</button>
                     </div>
                 </div>
             </form>
