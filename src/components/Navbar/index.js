@@ -30,10 +30,10 @@ export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-sm bg-body-tertiary navbar-custom">
             <div className="container-fluid fw-semibold">
-                <a class="navbar-brand nav-link" href="#">
+                <Link class="navbar-brand nav-link" to="/">
                     <img src={imgLogo} alt="Logo" width="34" class="d-inline-block mt-0 align-bottom"/>
                     Integra
-                </a>
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

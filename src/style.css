@@ -33,3 +33,11 @@ body[data-bs-theme="light"]{
 body[data-bs-theme="dark"] .navbar-custom {
     border-color: var(--azul);
 }
+
+.fs-7{
+    font-size: .9rem;
+}
+
+.fs-8{
+    font-size: .5rem;
+}
