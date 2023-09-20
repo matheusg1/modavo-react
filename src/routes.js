@@ -4,6 +4,7 @@ import Index from './pages/Inicio/Index';
 import Cadastro from './pages/Cadastro/Cadastro';
 import TwoFa from './pages/TwoFa/TwoFa';
 import Login from './pages/Login/Login';
+import Sms from './pages/Sms/Sms';
 
 export default function AppRoutes() {
     return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/2fa" element={<TwoFa />} />
+                <Route path="/sms" element={<Sms />} />
             </Routes>
         
     )
