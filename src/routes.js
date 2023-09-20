@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Index from './pages/inicio'
-import Cadastro from './pages/cadastro';
-import Login from './pages/login';
+import Index from './pages/Inicio/Index';
+import Cadastro from './pages/Cadastro/Cadastro';
+import TwoFa from './pages/TwoFa/TwoFa';
+import Login from './pages/Login/Login';
 
 export default function AppRoutes() {
     return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
                 <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/2fa" element={<TwoFa />} />
             </Routes>
         
     )
