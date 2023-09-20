@@ -525,7 +525,7 @@ export default function Cadastro() {
             <form className="d-flex flex-column flex-fill align-items-center pt-3 pb-5"
                 onSubmit={handleSubmit}>
                 <div className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-10 col-xxl-11">
-                    <h2 className='fs-1 mt-2 mb-4 d-none d-sm-block'>Criar nova conta</h2>
+                    <h2 className='fs-1 mt-3 mb-4 d-none d-sm-block'>Criar nova conta</h2>
                     <h2 className='fs-1 mt-3 text-center d-block d-sm-none'>Criar nova conta</h2>
                     <div className="input-group">
                         <div className="mb-sm-3 col-12 col-sm-5 col-xl-3 px-1">

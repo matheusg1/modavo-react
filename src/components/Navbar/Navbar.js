@@ -31,7 +31,7 @@ export default function Navbar() {
         <nav className="navbar navbar-expand-sm bg-body-tertiary navbar-custom">
             <div className="container-fluid fw-semibold">
                 <Link class="navbar-brand nav-link" to="/">
-                    <img src={imgLogo} alt="Logo" width="34" class="d-inline-block mt-0 align-bottom"/>
+                    <img src={imgLogo} alt="Logo" width="34" class="d-inline-block mt-0 align-bottom" />
                     Integra
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,15 @@ export default function Navbar() {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/cadastro">Cadastrar</Link>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Serviços
+                            </a>
+                            <ul class="dropdown-menu">                                
+                                <li><Link className="dropdown-item" to="/2fa">2FA</Link></li>
+                                <li><Link className="dropdown-item" to="/sms">SMS</Link></li>                      
+                            </ul>
                         </li>
                     </ul>
                     <div className="d-flex me-sm-2">
