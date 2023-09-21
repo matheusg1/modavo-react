@@ -5,9 +5,6 @@ import imgSms from '../../img/img-sms.png';
 import imgSearch from '../../img/img-search.png';
 import imgCadeado from '../../img/img-cadeado.png';
 import imgTextoAudio from '../../img/index/img-text-audio.png';
-import imgCelular from '../../img/index/img-celular-1.jpg';
-import imgCelular2 from '../../img/index/img-celular-2.jpg';
-import imgCelular3 from '../../img/index/img-celular-3.jpg';
 import imgRede from '../../img/index/img-rede.png';
 
 export default function Index() {
@@ -15,54 +12,54 @@ export default function Index() {
         <>
             <div className='col-12'>
                 <div className='d-flex flex-column flex-sm-row col-11 mx-auto my-5'>
-                    <img src={imgRede} className='img-fluid d-block d-sm-none'/>
+                    <img src={imgRede} className='img-fluid d-block d-sm-none' />
                     <div className='d-flex flex-column justify-content-center'>
-                        <div className='fs-1 text-primary-emphasis fw-bold mb-2'>Integra</div>
-                        <div className='fs-5 fw-light'>Comunique-se com confiança e alcance seus clientes de forma segura através do nosso CPaaS. Uma solução completa para integrar canais de comunicação, como SMS, autenticação de 2 fatores, Número Máscara e muito mais. </div>
+                        <div className='display-5 text-primary-emphasis fw-bold mb-2'>Integra</div>
+                        <div className='fs-5 fw-light col-9'>Comunique-se com confiança e alcance seus clientes de forma segura através do nosso CPaaS. Uma solução completa para integrar canais de comunicação, como SMS, autenticação de 2 fatores, Número Máscara e muito mais. </div>
                     </div>
                     <img src={imgRede} className='img-fluid d-none d-sm-block' />
                 </div>
+                <div className='min-vh-100 pt-5'>
+                    <h3 className='display-4 text-center fw-normal'>Nossos produtos</h3>
+                    <div className='d-flex flex-column flex-sm-row flex-wrap justify-content-center align-items-center align-items-sm-stretch my-5'>
+                        <CardServico
+                            imagem={imgCadeado}
+                            tamanhoImagem={"col-8 col-sm-9 col-md-8"}
+                            titulo="Autenticação de Dois Fatores"
+                            subtitulo="Fortaleça a estratégia de segurança de seu negócio."
+                        />
+                        <CardServico
+                            imagem={imgCampanha}
+                            tamanhoImagem={"col-8 col-sm-11 col-md-10"}
+                            titulo="Gerenciador de Campanhas"
+                            subtitulo="Impulsione suas campanhas com nosso serviço de envio de SMS em massa."
+                        />
+                        <CardServico
+                            imagem={imgSearch}
+                            tamanhoImagem={"col-5 col-sm-9 col-md-7"}
+                            titulo="Consulta de Números"
+                            subtitulo="Obtenha informações sobre um número de telefone celular de maneira fácil e rápida."
+                        />
+                        <CardServico
+                            imagem={imgSms}
+                            tamanhoImagem={"col-5 col-sm-9 col-md-7"}
+                            titulo="Envio de SMS"
+                            subtitulo="Envie SMS avulso de forma fácil e rápida para se conectar com seus clientes."
+                        />
+                        <CardServico
+                            imagem={imgTextoAudio}
+                            tamanhoImagem={"col-5"}
+                            titulo="Speech to Text"
+                            subtitulo="Converta áudio em texto escrito, transcrevendo gravações de voz em documentos digitais com precisão."
+                        />
+                        <CardServico
+                            imagem={imgTextoAudio}
+                            tamanhoImagem={"col-5"}
+                            titulo="Text to Speech"
+                            subtitulo="Transforma texto em áudio, proporcionando a reprodução de conteúdo escrito em voz sintetizada."
+                        />
 
-                <div className='d-flex flex-column flex-sm-row flex-wrap justify-content-center align-items-center align-items-sm-stretch my-5'>
-                    <CardServico
-                        imagem={imgCadeado}
-                        tamanhoImagem={"col-8 col-sm-9 col-md-8"}
-                        titulo="Autenticação de Dois Fatores"
-                        subtitulo="Fortaleça a estratégia de segurança de seu negócio."
-                    />
-                    <CardServico
-                        imagem={imgCampanha}
-                        tamanhoImagem={"col-8 col-sm-11 col-md-10"}
-                        titulo="Gerenciador de Campanhas"
-                        subtitulo="Impulsione suas campanhas com nosso serviço de envio de SMS em massa."
-                    />
-                    <CardServico
-                        imagem={imgSearch}
-                        tamanhoImagem={"col-5 col-sm-9 col-md-7"}
-                        titulo="Consulta de Números"
-                        subtitulo="Obtenha informações sobre um número de telefone celular de maneira fácil e rápida."
-                    />
-                    <CardServico
-                        imagem={imgSms}
-                        tamanhoImagem={"col-5 col-sm-9 col-md-7"}
-                        titulo="Envio de SMS"
-                        subtitulo="Envie SMS avulso de forma fácil e rápida para se conectar com seus clientes."
-                    />
-                    <CardServico
-                        imagem={imgTextoAudio}
-                        tamanhoImagem={"col-5"}
-                        titulo="Speech to Text"
-                        subtitulo="Converta áudio em texto escrito, transcrevendo gravações de voz em documentos digitais com precisão."
-                    />
-                    <CardServico
-                        imagem={imgTextoAudio}
-                        tamanhoImagem={"col-5"}
-                        titulo="Text to Speech"
-                        subtitulo="Transforma texto em áudio, proporcionando a reprodução de conteúdo escrito em voz sintetizada."
-                    />
-
-
-
+                    </div>
                 </div>
             </div>
         </>

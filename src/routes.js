@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Index from './pages/Inicio/Index';
+import Index from './pages/Inicio/';
 import Cadastro from './pages/Cadastro/Cadastro';
 import TwoFa from './pages/TwoFa/TwoFa';
 import Login from './pages/Login/Login';
