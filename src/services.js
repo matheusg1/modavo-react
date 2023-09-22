@@ -10,9 +10,9 @@ export function buscaEndereco(cep) {
         .then(response => {
             if (response.status === 200) {
                 const data = response.data;
-                               
-                    console.log(`Bairro: ${data.bairro}`);                                  
-                
+
+                console.log(`Bairro: ${data.bairro}`);
+
                 return data.json();
             } else {
                 console.log('Não foi possível encontrar as informações para este CEP.');
@@ -128,3 +128,10 @@ export const Toast = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 })
+
+export const mostraMensagemToast = (icon, mensagem) =>{
+    Toast.fire({
+        icon: icon,
+        title: mensagem
+    })
+}

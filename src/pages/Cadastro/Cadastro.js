@@ -7,6 +7,7 @@ import {
     formataCelular,
     formataTelefone,
     formataCep,
+    mostraMensagemToast,
 } from '../../services'
 
 export default function Cadastro() {
@@ -330,7 +331,7 @@ export default function Cadastro() {
         else if (contemNumeroOuCaractereEspecial(dadosPessoais.login)) {
             setValidacoes({ ...validacoes, login: 'Login deve ter apenas letras' });
         }
-        else if (dadosPessoais.login.length != 6) {
+        else if (dadosPessoais.login.length > 6) {
             setValidacoes({ ...validacoes, login: 'Login deve ter 6 letras' });
         }
         else {
@@ -448,9 +449,6 @@ export default function Cadastro() {
     }
 
     const usuarioExistente = (u) => {
-        if (!localStorage.getItem('usuarios')) {
-            return null;
-        }
         const users = JSON.parse(localStorage.getItem('usuarios'));
         return u in users;
     }
@@ -489,40 +487,37 @@ export default function Cadastro() {
 
         for (let validacao in validacoes) {
             if (validacoes[validacao] != '') {
-                console.log(validacao);
                 userValido = false;
-                console.log('user invalido');
-                break;
+                mostraMensagemToast('warning', 'Revise os campos');
+                return;                
             }
-            else {
-                console.log('user VALIDO');
+            else {                
                 userValido = true;
             }
         }
 
-        console.log('chegou aqui');
-        if (userValido && !usuarioExistente(dadosPessoais.login)) {
-            //console.log('chegou aqui 1');
-            // const usuarios = JSON.parse(localStorage.getItem('usuarios')) || null;
-            let usuarios;
-            
-            if (localStorage.getItem('usuarios')) {
-                usuarios = JSON.parse(localStorage.getItem('usuarios'))
+        const usuariosArmazenados = localStorage.getItem('usuarios');
+        if (usuariosArmazenados) {
+            if (userValido && !usuarioExistente(dadosPessoais.login)) {
+                const usuarios = JSON.parse(usuariosArmazenados);
+                usuarios[dadosPessoais.login] = dadosPessoais
+                localStorage.setItem('usuarios', JSON.stringify(usuarios));
+                mostraMensagemToast('success', 'Usuário criado com sucesso')
             }
             else {
-                usuarios = []
+                mostraMensagemToast('error', 'Usuário já existente')
+                return;
             }
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-            // usuarios[dadosPessoais.login] = dadosPessoais;
-            //console.log('chegou aqui 2');
-
         }
         else {
-            console.log('Login já existente');
-            return;
-        }
+            let usuarios = {}
+            usuarios[dadosPessoais.login] = dadosPessoais
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            mostraMensagemToast('success', 'Usuário criado com sucesso')
 
+        }
     }
+
 
     return (
         <>
