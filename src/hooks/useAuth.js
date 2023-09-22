@@ -4,22 +4,33 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
     const [user, setUser] = useState('');
+    const [usuarioLogado, setUsuarioLogado] = useState('')
 
     useEffect(() => {
         async function fetchUser() {
-            try {
-                //const user = await supabase.auth.getUser();
-                const user =  localStorage.getItem("usuarios");                
 
-                if (user.data.user) {
-                    setUser(user);
 
-                } else if(user.error) {
-                    setUser('');                    
-                }
-            } catch (error) {
-                //tratar
+            if(localStorage.getItem('usuarioLogado')){
+                console.log(JSON.parse(localStorage.getItem('usuarioLogado')));
+                //setUser(user);
             }
+            else{
+                
+            }
+            // const listaUsuarios = localStorage.getItem("usuarios");
+            // const listaUsuariosJson = JSON.parse(listaUsuarios);
+            // if (!listaUsuariosJson) {
+            //     return;
+            // }
+
+            // const usuarioTentativa = listaUsuariosJson[values.login];
+            // if (!usuarioTentativa) {
+
+            //     return;
+            // }
+            // else {
+            //     setUser(usuarioTentativa);
+            // }
         }
         fetchUser();
     }, []);

@@ -169,18 +169,17 @@ export default function Cadastro() {
     useEffect(() => {
         // Verifique o estado de inputValue e defina o estado de outputValue com base nele.
 
-        for(let validacao in validacoes){
-            if(validacoes[validacao]){
-                console.log('cadastrar true');
+        for (let validacao in validacoes) {
+            if (validacoes[validacao]) {
                 setcadastrarDisabled(true);
             }
-            else{
-                console.log('cadastrar false');
+            else {
+
                 setcadastrarDisabled(false);
             }
-        }        
-      }, [validacoes]);
-    
+        }
+    }, [validacoes]);
+
 
 
     const handleChangeNascimento = (e) => {
@@ -449,7 +448,10 @@ export default function Cadastro() {
     }
 
     const usuarioExistente = (u) => {
-        const users = JSON.parse(localStorage.getItem('usuarios')) || null;        
+        if (!localStorage.getItem('usuarios')) {
+            return null;
+        }
+        const users = JSON.parse(localStorage.getItem('usuarios'));
         return u in users;
     }
 
@@ -475,9 +477,9 @@ export default function Cadastro() {
         let userValido;
 
         for (const propriedade in dadosPessoais) {
-            if (dadosPessoais[propriedade].length == 0) {
-                novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };        
-            } else {    
+            if (!dadosPessoais[propriedade] || dadosPessoais[propriedade].length == 0) {
+                novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };
+            } else {
                 novaValidacao = { ...novaValidacao, [propriedade]: '' };
             }
 
@@ -485,38 +487,40 @@ export default function Cadastro() {
 
         setValidacoes(novaValidacao);
 
-        for(let validacao in validacoes){
-            if(validacoes[validacao] != ''){
+        for (let validacao in validacoes) {
+            if (validacoes[validacao] != '') {
                 console.log(validacao);
                 userValido = false;
                 console.log('user invalido');
                 break;
             }
-            else{
+            else {
                 console.log('user VALIDO');
                 userValido = true;
             }
         }
 
-        if (userValido &&!usuarioExistente(dadosPessoais.login)) {
-            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || null;
-            usuarios[dadosPessoais.login] = dadosPessoais;
+        console.log('chegou aqui');
+        if (userValido && !usuarioExistente(dadosPessoais.login)) {
+            //console.log('chegou aqui 1');
+            // const usuarios = JSON.parse(localStorage.getItem('usuarios')) || null;
+            let usuarios;
+            
+            if (localStorage.getItem('usuarios')) {
+                usuarios = JSON.parse(localStorage.getItem('usuarios'))
+            }
+            else {
+                usuarios = []
+            }
             localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            // usuarios[dadosPessoais.login] = dadosPessoais;
+            //console.log('chegou aqui 2');
 
         }
         else {
             console.log('Login já existente');
             return;
         }
-
-        // Adiciona dadosPessoais à lista de usuários
-        //listaUsuarios.push(dadosPessoais);
-
-        // Atualiza o item "usuarios" no localStorage com a lista atualizada
-        //localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
-
-        // Exibe a lista de usuários atualizada
-        //console.log(listaUsuarios);
 
     }
 

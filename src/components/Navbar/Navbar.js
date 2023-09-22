@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-
-import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { Link, useNavigate } from 'react-router-dom';
 import imgLogo from '../../img/logo.svg'
 
 export default function Navbar() {
     const [checked, setChecked] = useState(false);
+    const { user, setUser } = useAuth();
+    const navigate = useNavigate();
+
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
@@ -27,6 +30,12 @@ export default function Navbar() {
         }
     },)
 
+    async function logout() {
+        setUser('')
+        localStorage.setItem('usuarioLogado', '')
+        navigate('/login');
+    }
+
     return (
         <nav className="navbar navbar-expand-sm bg-body-tertiary navbar-custom">
             <div className="container-fluid fw-semibold">
@@ -43,19 +52,24 @@ export default function Navbar() {
                             <Link className="nav-link" to="/login">Login</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/cadastro">Cadastrar</Link>
+                            <Link className="nav-link" to="/cadastro">Cadastro</Link>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Serviços
                             </a>
-                            <ul class="dropdown-menu">                                
+                            <ul class="dropdown-menu">
                                 <li><Link className="dropdown-item" to="/2fa">2FA</Link></li>
-                                <li><Link className="dropdown-item" to="/sms">SMS</Link></li>                      
+                                <li><Link className="dropdown-item" to="/sms">SMS</Link></li>
                             </ul>
                         </li>
                     </ul>
                     <div className="d-flex me-sm-2">
+                        {user ? (
+                            <Link className="nav-link pe-lg-4" to="/login" onClick={logout}>Deslogar</Link>
+                        ) : (
+                            ''
+                        )}
                         <span className="me-2" >☾</span>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
