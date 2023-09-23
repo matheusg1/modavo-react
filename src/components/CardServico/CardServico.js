@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-export default function CardServico({ imagem, titulo, subtitulo, tamanhoImagem, link }) {
+export default function CardServico({ imagem, titulo, subtitulo, tamanhoImagem, link, descricaoImagem }) {
     const navigate = useNavigate();
     
     const [elementStyle, setElementStyle] = useState('');
@@ -30,7 +30,9 @@ export default function CardServico({ imagem, titulo, subtitulo, tamanhoImagem, 
         <div className='col-10 col-sm-5 col-md-4 col-lg-3 m-3 shadow d-flex flex-column align-items-center justify-content-between rounded-1 p-3 card-produto'
             style={{animation: elementStyle}}
             onClick={() => navigate(link)}>
-            <img className={`img-fluid my-auto ${tamanhoImagem}`} src={imagem}></img>
+            <img className={`img-fluid my-auto ${tamanhoImagem}`} 
+            src={imagem}
+            alt={descricaoImagem}/>
             <div className="">
                 <div className='fs-5 fw-bold'>{titulo}</div>
                 <div className='fs-7 text-primary-emphasis'>{subtitulo}</div>

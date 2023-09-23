@@ -25,8 +25,13 @@ export default function TwoFa() {
 
     const enviarSms = () => {
 
+        
+        if(!celular.length){
+            mostraMensagemToast('warning', 'Preencha o campo')
+            return;
+        }
+        
         const numero = gerarNumeroAleatorio();
-
         if (numero < 6) {
             setCelular('')
             mostraMensagemToast('success', 'Código enviado com sucesso')
@@ -39,7 +44,10 @@ export default function TwoFa() {
     return (
         <>
             <div className='d-flex flex-column flex-md-row align-items-center justify-content-center mt-lg-5'>
-                <img className="img-fluid col-10 col-sm-6 d-block d-md-none" src={imgLogin}></img>
+                <img className="img-fluid col-10 col-sm-6 d-block d-md-none"
+                    src={imgLogin}
+                    alt='Ilustração de personagem apoiado num celular que mostra a tela de login.'
+                />
                 <div className='col-11 col-sm-11 col-md-5'>
                     <h2 className='fs-3 fw-bold text-primary-emphasis mb-md-2'>2FA - Autenticação em dois fatores</h2>
                     <div className='fs-6 fw-medium col-12 col-md-12'>
@@ -65,25 +73,28 @@ export default function TwoFa() {
                     tamanhoImagem={"col-8 col-sm-11 col-md-10 col-xxl-7"}
                     titulo="Passo 1"
                     subtitulo="O usuário configura a 2FA em sua conta online, adicionando uma camada extra de segurança."
-                />
+                    descricaoImagem="Ilustração de um cadeado sobrepondo um escudo."
+                    />
                 <div className='col-1 d-none d-lg-block my-auto'>
-                    <img src={imgArrow} className='img-fluid' />
+                    <img src={imgArrow} className='img-fluid' alt="Ilustração de uma seta apontando para o próximo passo." />
                 </div>
                 <Card2fa
                     imagem={img2}
                     tamanhoImagem={"col-8 col-sm-11 col-md-10 col-xxl-7"}
                     titulo="Passo 2"
                     subtitulo="Ao tentar fazer login, o usuário insere suas credenciais e recebe um código de verificação via SMS."
-                />
+                    descricaoImagem="Ilustração de mãos segurando um celular."
+                    />
                 <div className='col-1 d-none d-lg-block my-auto'>
-                    <img src={imgArrow} className='img-fluid' />
+                    <img src={imgArrow} className='img-fluid' alt="Ilustração de uma seta apontando para o próximo passo." />
                 </div>
                 <Card2fa
                     imagem={img3}
                     tamanhoImagem={"col-8 col-sm-11 col-md-10 col-xxl-7"}
                     titulo="Passo 3"
                     subtitulo="O usuário insere esse código no notebook e conclui o login com segurança."
-                />
+                    descricaoImagem="Ilustração de um notebook sendo usado por duas mãos, com documentos, celular e um copo próximos."
+                    />
             </div>
 
         </>

@@ -3,7 +3,7 @@ import imgSms from '../../img/img-sms.png';
 import {
     formataCelular,
     gerarNumeroAleatorio,
-    Toast
+    mostraMensagemToast
 } from '../../services';
 
 export default function Sms() {
@@ -20,19 +20,18 @@ export default function Sms() {
 
         const numero = gerarNumeroAleatorio();
 
+        if(!celular.length){
+            mostraMensagemToast('warning', 'Preencha o campo')
+            return;
+        }
+
         if (numero < 6) {
             setCelular('')
             setMensagem('')
-            Toast.fire({
-                icon: 'success',
-                title: 'SMS enviado com sucesso'
-            })
+            mostraMensagemToast('success', 'SMS enviado com sucesso')                                    
         }
         else {
-            Toast.fire({
-                icon: 'error',
-                title: 'Falha ao enviar SMS'
-            })
+            mostraMensagemToast('error', 'Falha ao enviar SMS')            
         }
     }
 
@@ -60,7 +59,9 @@ export default function Sms() {
                             onClick={enviarSms}>Enviar</button>
                     </div>
                 </div>
-                <img className="img-fluid col-1 col-md-4 col-lg-3 col-xxl-2 ms-4 d-none d-md-block" src={imgSms}></img>
+                <img className="img-fluid col-1 col-md-4 col-lg-3 col-xxl-2 ms-4 d-none d-md-block"
+                    src={imgSms}
+                    alt='Ilustração de dois personagens trocando mensagens de texto.' />
             </div>
         </>
     )

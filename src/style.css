@@ -45,7 +45,7 @@ body[data-bs-theme="dark"] path {
 }
 
 .footer-custom {
-    font-size: .8rem;
+    font-size: .9rem;
     line-height: 1rem;
 }
 
@@ -97,8 +97,6 @@ body[data-bs-theme="dark"] path {
 
 .card-2fa {
     min-height: 400px !important;
-    /* transform: translateX(-20px);
-    animation: fadeMove 2s ease-in-out forwards ;     */
 }
 
 #main,
@@ -122,33 +120,6 @@ body[data-bs-theme="dark"] path {
     /* filter: blur(1px); */
     z-index: -1;
 }
-
-
-
-/* @media (min-width: 576px) {}
-
-
-@media (min-width: 768px) {}
-
-
-@media (min-width: 992px) {}
-
-@media (min-width: 1200px) {
-    .texto-box {
-        height: 270px;
-
-    }
-}
-
-@media (min-width: 1400px) {
-    .texto-box {
-        height: 190px;
-    }
-} */
-
-/* .texto-box {
-    min-height: 280px !important;
-} */
 
 .min-vh-60 {
     min-height: 60vh;
