@@ -280,6 +280,7 @@ export default function Cadastro() {
     }
 
     const handleChangeLogin = (e) => {
+
         setDadosPessoais({ ...dadosPessoais, login: e.target.value });
     }
 
@@ -331,7 +332,7 @@ export default function Cadastro() {
         else if (contemNumeroOuCaractereEspecial(dadosPessoais.login)) {
             setValidacoes({ ...validacoes, login: 'Login deve ter apenas letras' });
         }
-        else if (dadosPessoais.login.length > 6) {
+        else if (dadosPessoais.login.length != 6) {
             setValidacoes({ ...validacoes, login: 'Login deve ter 6 letras' });
         }
         else {
@@ -473,25 +474,26 @@ export default function Cadastro() {
         }
 
         let userValido;
-
-        for (const propriedade in dadosPessoais) {
-            if (!dadosPessoais[propriedade] || dadosPessoais[propriedade].length == 0) {
-                novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };
-            } else {
-                novaValidacao = { ...novaValidacao, [propriedade]: '' };
-            }
-
-        }
-
-        setValidacoes(novaValidacao);
+        /*
+                for (const propriedade in dadosPessoais) {
+                    if (!dadosPessoais[propriedade] || dadosPessoais[propriedade].length == 0) {
+                        novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };
+                    } else {
+                        novaValidacao = { ...novaValidacao, [propriedade]: '' };
+                    }
+        
+                }
+        
+                setValidacoes(novaValidacao);
+            */
 
         for (let validacao in validacoes) {
             if (validacoes[validacao] != '') {
                 userValido = false;
                 mostraMensagemToast('warning', 'Revise os campos');
-                return;                
+                return;
             }
-            else {                
+            else {
                 userValido = true;
             }
         }
