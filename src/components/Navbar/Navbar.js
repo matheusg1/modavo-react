@@ -78,7 +78,7 @@ export default function Navbar() {
                             <label for="switchDarkMode" className="me-2" >☼</label>
                         </div>
                     </div>
-                    <span class="navbar-text pe-sm-2">
+                    <span class="navbar-text text-primary-emphasis pe-sm-2">
                         {user ? (user.login) : ('')}
                     </span>
                     <div className="d-flex me-sm-2">

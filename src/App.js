@@ -15,6 +15,7 @@ export default function App() {
                     <div className=''>Desenvolvido por <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://github.com/matheusg1" target='_blank'>Matheus G.</a> e <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://www.linkedin.com/in/duarrte/" target='_blank'>Luan Souza</a></div>                    
                 </div>
                 <div className='d-flex flex-column'>
+                    <div>Imagens por <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://www.pexels.com/" target="_blank">Pexels</a></div>
                     <div className=''>Ilustrações por <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://icons8.com/" target='_blank'>Icons 8</a></div>
                     <div>Vetores e ícones por <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://www.svgrepo.com" target="_blank">SVG Repo</a></div>
                 </div>

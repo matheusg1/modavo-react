@@ -19,7 +19,17 @@ export default function Index() {
                     </div>
                     <img src={imgRede} className='img-fluid d-none d-sm-block' />
                 </div>
-                <div className='min-vh-100 pt-5'>
+
+                <div className='min-vh-60 d-flex justify-content-center  py-5' id="main">
+                    <div className='bg-body-tertiary d-flex flex-column flex-md-row justify-content-center align-items-center' style={{ "--bs-bg-opacity": ".5" }}>
+                        <div className='fs-3 px-4 py-2 col-12 col-sm-9 col-md-4 my-3 my-md-0'>Na Integra, compreendemos o poder da comunicação eficaz. Temos uma gama abrangente de serviços de comunicação,</div>
+                        <div className='fs-3 px-4 py-2 col-12 col-sm-9 col-md-4 my-3 my-md-0'>
+                            Projetados para ajudar você a se conectar com seu público de maneira mais impactante e segura do que nunca.</div>
+                        <div className='fs-3 px-4 py-2 col-12 col-sm-9 col-md-4 my-3 my-md-0'> Com nossa experiência e tecnologia de ponta, você pode elevar sua estratégia de comunicação a novos patamares.</div>
+                    </div>
+                </div>
+
+                <div className='min-vh-100 pt-5' id="produtos">
                     <h3 className='display-4 text-center fw-normal'>Nossos produtos</h3>
                     <div className='d-flex flex-column flex-sm-row flex-wrap justify-content-center align-items-center align-items-sm-stretch my-5'>
                         <CardServico

@@ -13,7 +13,6 @@ export default function AppRoutes() {
     return (
 
         <Routes>
-
             <Route
                 path="*"
                 element={user ? <Index /> : <Login />}
