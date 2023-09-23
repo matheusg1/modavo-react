@@ -6,11 +6,9 @@ export function AuthContextProvider({ children }) {
     const [user, setUser] = useState('');    
 
     useEffect(() => {
-        async function fetchUser() {
-
-
+        async function fetchUser() {            
             const usuarioLogado = localStorage.getItem('usuarioLogado')
-
+            console.log('oxe')
             if (usuarioLogado) {
                 const usuarioLogadoJson = JSON.parse(usuarioLogado);
 
@@ -23,25 +21,9 @@ export function AuthContextProvider({ children }) {
                 setUser('');
                 localStorage.setItem('usuarioLogado', '');
             }
-
-
-            // const listaUsuarios = localStorage.getItem("usuarios");
-            // const listaUsuariosJson = JSON.parse(listaUsuarios);
-            // if (!listaUsuariosJson) {
-            //     return;
-            // }
-
-            // const usuarioTentativa = listaUsuariosJson[values.login];
-            // if (!usuarioTentativa) {
-
-            //     return;
-            // }
-            // else {
-            //     setUser(usuarioTentativa);
-            // }
         }
         fetchUser();
-    }, [user]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>

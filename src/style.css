@@ -47,3 +47,46 @@ body[data-bs-theme="dark"] path {
 .fs-7 {
     font-size: .95rem;
 }
+
+.card-produto {
+    opacity: 0;
+    min-height: 310px !important;    
+    transform: translateX(-20px) !important;
+    animation: fadeMove 2s ease-in-out forwards !important;
+}
+
+
+.card-produto:nth-child(2) {
+    animation-delay: .1s !important;
+}
+
+.card-produto:nth-child(3) {
+    animation-delay: .2s !important;
+}
+
+.card-produto:nth-child(4) {
+    animation-delay: .3s !important;
+}
+
+.card-produto:nth-child(5) {
+    animation-delay: .4s !important;
+}
+
+.card-produto:nth-child(6) {
+    animation-delay: .5s !important;
+}
+
+
+
+
+@keyframes fadeMove {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
