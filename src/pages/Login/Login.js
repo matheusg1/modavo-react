@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
-import { Toast } from '../../services';
+import { Toast, mostraMensagemToast } from '../../services';
 
 export default function Login() {
     const { user, setUser } = useAuth();
@@ -49,6 +49,7 @@ export default function Login() {
 
         const usuarioTentativa = listaUsuariosJson[values.login];
         if (!usuarioTentativa) {
+            mostraMensagemToast('error', 'Usuário não encontrado')
             Toast.fire({
                 icon: 'error',
                 title: 'Usuário não encontrado'
@@ -57,11 +58,13 @@ export default function Login() {
         }
 
         if (values.login === usuarioTentativa.login && values.senha === usuarioTentativa.senha) {
+            mostraMensagemToast('success', 'Logado com sucesso')
             setUser(usuarioTentativa);
             localStorage.setItem('usuarioLogado', JSON.stringify(usuarioTentativa));
-            navigate('/2fa');
+            navigate('/');
         }
         else {
+            mostraMensagemToast('error', 'Senha incorreta')
             setUser('');
         }
         return;

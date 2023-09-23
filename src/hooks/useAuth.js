@@ -3,20 +3,28 @@ import { createContext, useState, useContext, useEffect } from "react";
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-    const [user, setUser] = useState('');
-    const [usuarioLogado, setUsuarioLogado] = useState('')
+    const [user, setUser] = useState('');    
 
     useEffect(() => {
         async function fetchUser() {
 
 
-            if(localStorage.getItem('usuarioLogado')){
-                console.log(JSON.parse(localStorage.getItem('usuarioLogado')));
-                //setUser(user);
+            const usuarioLogado = localStorage.getItem('usuarioLogado')
+
+            if (usuarioLogado) {
+                const usuarioLogadoJson = JSON.parse(usuarioLogado);
+
+                console.log(localStorage.getItem('usuarioLogado'));
+
+                setUser(usuarioLogadoJson);
+                localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogadoJson));
             }
-            else{
-                
+            else {
+                setUser('');
+                localStorage.setItem('usuarioLogado', '');
             }
+
+
             // const listaUsuarios = localStorage.getItem("usuarios");
             // const listaUsuariosJson = JSON.parse(listaUsuarios);
             // if (!listaUsuariosJson) {
@@ -33,7 +41,7 @@ export function AuthContextProvider({ children }) {
             // }
         }
         fetchUser();
-    }, []);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>

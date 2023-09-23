@@ -24,37 +24,37 @@ export default function Index() {
                     <div className='d-flex flex-column flex-sm-row flex-wrap justify-content-center align-items-center align-items-sm-stretch my-5'>
                         <CardServico
                             imagem={imgCadeado}
-                            tamanhoImagem={"col-8 col-sm-9 col-md-8"}
+                            tamanhoImagem={"col-8 col-sm-9 col-md-8 col-xxl-6"}
                             titulo="Autenticação de Dois Fatores"
                             subtitulo="Fortaleça a estratégia de segurança de seu negócio."
                         />
                         <CardServico
                             imagem={imgCampanha}
-                            tamanhoImagem={"col-8 col-sm-11 col-md-10"}
+                            tamanhoImagem={"col-8 col-sm-11 col-md-10 col-xxl-7"}
                             titulo="Gerenciador de Campanhas"
                             subtitulo="Impulsione suas campanhas com nosso serviço de envio de SMS em massa."
                         />
                         <CardServico
                             imagem={imgSearch}
-                            tamanhoImagem={"col-5 col-sm-9 col-md-7"}
+                            tamanhoImagem={"col-5 col-sm-9 col-md-7 col-xxl-5"}
                             titulo="Consulta de Números"
                             subtitulo="Obtenha informações sobre um número de telefone celular de maneira fácil e rápida."
                         />
                         <CardServico
                             imagem={imgSms}
-                            tamanhoImagem={"col-5 col-sm-9 col-md-7"}
+                            tamanhoImagem={"col-5 col-sm-9 col-md-7 col-xxl-5"}
                             titulo="Envio de SMS"
                             subtitulo="Envie SMS avulso de forma fácil e rápida para se conectar com seus clientes."
                         />
                         <CardServico
                             imagem={imgTextoAudio}
-                            tamanhoImagem={"col-5"}
+                            tamanhoImagem={"col-5 col-xxl-4"}
                             titulo="Speech to Text"
                             subtitulo="Converta áudio em texto escrito, transcrevendo gravações de voz em documentos digitais com precisão."
                         />
                         <CardServico
                             imagem={imgTextoAudio}
-                            tamanhoImagem={"col-5"}
+                            tamanhoImagem={"col-5 col-xxl-4"}
                             titulo="Text to Speech"
                             subtitulo="Transforma texto em áudio, proporcionando a reprodução de conteúdo escrito em voz sintetizada."
                         />

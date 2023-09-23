@@ -474,18 +474,17 @@ export default function Cadastro() {
         }
 
         let userValido;
-        /*
-                for (const propriedade in dadosPessoais) {
-                    if (!dadosPessoais[propriedade] || dadosPessoais[propriedade].length == 0) {
-                        novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };
-                    } else {
-                        novaValidacao = { ...novaValidacao, [propriedade]: '' };
-                    }
-        
-                }
-        
-                setValidacoes(novaValidacao);
-            */
+
+        for (const propriedade in dadosPessoais) {
+            if (!dadosPessoais[propriedade] || dadosPessoais[propriedade].length == 0) {
+                novaValidacao = { ...novaValidacao, [propriedade]: 'Campo obrigatório' };
+            }
+            else {
+                novaValidacao = { ...novaValidacao, [propriedade]: validacoes[propriedade] };
+            }
+        }
+
+        setValidacoes(novaValidacao);
 
         for (let validacao in validacoes) {
             if (validacoes[validacao] != '') {
@@ -516,14 +515,13 @@ export default function Cadastro() {
             usuarios[dadosPessoais.login] = dadosPessoais
             localStorage.setItem('usuarios', JSON.stringify(usuarios));
             mostraMensagemToast('success', 'Usuário criado com sucesso')
-
         }
     }
 
 
     return (
         <>
-            <form className="d-flex flex-column flex-fill align-items-center pt-3 pb-5"
+            <form className="d-flex flex-column flex-fill align-items-center justify-content-xxl-center pt-3 pb-5"
                 onSubmit={handleSubmit}>
                 <div className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-10 col-xxl-11">
                     <h2 className='fs-1 mt-3 mb-4 d-none d-sm-block'>Criar nova conta</h2>
@@ -752,7 +750,7 @@ export default function Cadastro() {
                         </div>
                     </div>
                     <div className='text-center'>
-                        <button type="submit" className="btn btn-outline-primary w-75 align-self-center" disabled={cadastrarDisabled}>Cadastrar</button>
+                        <button type="submit" className="btn btn-outline-primary w-100 align-self-center mt-xxl-4" >Cadastrar</button>
                     </div>
                 </div>
             </form>

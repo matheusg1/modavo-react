@@ -13,17 +13,33 @@ export default function AppRoutes() {
     return (
 
         <Routes>
-            <Route path="*" element={<Navigate to="/" replace />} />
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<Cadastro />} />            
+
+            <Route
+                path="*"
+                element={user ? <Index /> : <Login />}
+            />
+
+            <Route
+                path="/"
+                element={user ? <Index /> : <Login />}
+            />
+
+            <Route
+                path="/login"
+                element={user ? <Index /> : <Login />}
+            />
+
+            <Route
+                path="/cadastro"
+                element={user ? <Index /> : <Cadastro />}
+            />
             <Route
                 path="/2fa"
-                element={user ? <TwoFa /> : <Navigate to="/login" replace />}
+                element={user ? <TwoFa /> : <Login />}
             />
             <Route
                 path="/sms"
-                element={user ? <Sms /> : <Navigate to="/login" replace />}
+                element={user ? <Sms /> : <Login/>}
             />
         </Routes>
 

@@ -44,25 +44,29 @@ export default function Navbar() {
                     Integra
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                    <label className="navbar-toggler-icon"></label>
                 </button>
                 <div className="collapse navbar-collapse fw-medium" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/cadastro">Cadastro</Link>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Serviços
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/2fa">2FA</Link></li>
-                                <li><Link className="dropdown-item" to="/sms">SMS</Link></li>
-                            </ul>
-                        </li>
+                        {!user ? (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/login">Login</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/cadastro">Cadastro</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/2fa">2FA</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/sms">SMS</Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                     <div className="d-flex me-sm-2">
                         {user ? (
@@ -70,13 +74,13 @@ export default function Navbar() {
                         ) : (
                             ''
                         )}
-                        <span className="me-2" >☾</span>
+                        <label for="switchDarkMode" className="me-2" >☾</label>
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                            <input className="form-check-input" type="checkbox" role="switch" id="switchDarkMode"
                                 checked={checked}
                                 onChange={handleChange}
                             />
-                            <label className="form-check-label" for="flexSwitchCheckDefault">☼</label>
+                            <label for="switchDarkMode" className="me-2" >☼</label>
                         </div>
                     </div>
                 </div>
