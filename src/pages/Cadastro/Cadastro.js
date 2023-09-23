@@ -428,8 +428,7 @@ export default function Cadastro() {
         else if (contemNumeroOuCaractereEspecial(dadosPessoais.senha)) {
             setValidacoes({ ...validacoes, senha: 'Senha deve ter apenas letras' });
         }
-        else if (dadosPessoais.senha.length != 8) {
-            console.log(dadosPessoais.senha.length)
+        else if (dadosPessoais.senha.length != 8) {            
             setValidacoes({ ...validacoes, senha: 'Senha deve ter 8 caracteres' });
         }
         else {

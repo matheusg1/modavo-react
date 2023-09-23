@@ -44,15 +44,32 @@ body[data-bs-theme="dark"] path {
     fill: #4958B9;
 }
 
-.fs-7 {
-    font-size: .95rem;
+.footer-custom {
+    font-size: .8rem;
 }
 
 .card-produto {
     opacity: 0;
-    min-height: 310px !important;    
-    transform: translateX(-20px) !important;
-    animation: fadeMove 2s ease-in-out forwards !important;
+    min-height: 330px !important;
+    transform: translateX(-20px);
+    animation: fadeMove 2s ease-in-out forwards ;    
+}
+
+.card-produto:hover {
+    background-color: rgba(128, 128, 128, 0.08) !important;    
+    cursor: pointer;
+}
+
+@keyframes fadeMove {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 
@@ -77,16 +94,8 @@ body[data-bs-theme="dark"] path {
 }
 
 
-
-
-@keyframes fadeMove {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+.card-2fa {
+    min-height: 400px !important;
+    /* transform: translateX(-20px);
+    animation: fadeMove 2s ease-in-out forwards ;     */
 }

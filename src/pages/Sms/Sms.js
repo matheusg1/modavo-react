@@ -60,7 +60,7 @@ export default function Sms() {
                             onClick={enviarSms}>Enviar</button>
                     </div>
                 </div>
-                <img className="img-fluid col-1 col-md-4 col-lg-3 ms-4 d-none d-md-block" src={imgSms}></img>
+                <img className="img-fluid col-1 col-md-4 col-lg-3 col-xxl-2 ms-4 d-none d-md-block" src={imgSms}></img>
             </div>
         </>
     )

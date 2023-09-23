@@ -68,12 +68,7 @@ export default function Navbar() {
                             </>
                         )}
                     </ul>
-                    <div className="d-flex me-sm-2">
-                        {user ? (
-                            <Link className="nav-link pe-lg-4" to="/login" onClick={logout}>Deslogar</Link>
-                        ) : (
-                            ''
-                        )}
+                    <div className='d-flex'>
                         <label for="switchDarkMode" className="me-2" >☾</label>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="switchDarkMode"
@@ -82,6 +77,16 @@ export default function Navbar() {
                             />
                             <label for="switchDarkMode" className="me-2" >☼</label>
                         </div>
+                    </div>
+                    <span class="navbar-text pe-sm-2">
+                        {user ? (user.login) : ('')}
+                    </span>
+                    <div className="d-flex me-sm-2">
+                        {user ? (
+                            <Link className="nav-link pe-lg-4" to="/login" onClick={logout}>Deslogar</Link>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </div>
             </div>
