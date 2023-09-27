@@ -517,7 +517,6 @@ export default function Cadastro() {
         }
     }
 
-
     return (
         <>
             <form className="d-flex flex-column flex-fill align-items-center justify-content-xxl-center pt-3 pb-5"
@@ -526,7 +525,7 @@ export default function Cadastro() {
                     <h2 className='fs-1 mt-3 mb-4 d-none d-sm-block'>Criar nova conta</h2>
                     <h2 className='fs-1 mt-3 text-center d-block d-sm-none'>Criar nova conta</h2>
                     <div className="input-group">
-                        <div className="mb-sm-3 col-12 col-sm-5 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-5 col-xl-3 px-3">
                             <label htmlFor="inputNome" className="form-label">Nome</label>
                             <input type="text" className="form-control " id="inputNome"
                                 name="nome"
@@ -537,7 +536,7 @@ export default function Cadastro() {
                                 {validacoes.nome}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-3 px-3">
                             <label htmlFor="inputNascimento" className="form-label">Nascimento</label>
                             <input type="date" className="form-control" id="inputNascimento"
                                 name="nascimento"
@@ -548,7 +547,7 @@ export default function Cadastro() {
                                 {validacoes.nascimento}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-2 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-2 px-3">
                             <label for="inputCpf" className="form-label">CPF</label>
                             <input type="text" className="form-control" id="inputCpf"
                                 name="cpf"
@@ -561,7 +560,7 @@ export default function Cadastro() {
                             </div>
                         </div>
 
-                        <div className="mb-sm-3 col-12 col-sm-5 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-5 col-xl-3 px-3">
                             <label htmlFor="inputNomeMaterno" className="form-label">Nome materno</label>
                             <input type="text" className="form-control" id="inputNomeMaterno"
                                 name="nomeMaterno"
@@ -573,7 +572,7 @@ export default function Cadastro() {
                                 {validacoes.nomeMaterno}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-6 col-xl-4 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-6 col-xl-4 px-3">
                             <label for="inputGenero" className="form-label">Gênero</label>
                             <select type="select" className="form-control" id="inputGenero"
                                 name="genero"
@@ -592,7 +591,7 @@ export default function Cadastro() {
                             </div>
                         </div>
 
-                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-2 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-2 px-3">
                             <label for="inputCelular" className="form-label">Celular</label>
                             <input type="text" className="form-control " id="inputCelular"
                                 name="celular"
@@ -606,7 +605,7 @@ export default function Cadastro() {
                             </div>
                         </div>
 
-                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-2 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-2 px-3">
                             <label for="inputTelefone" className="form-label">Telefone</label>
                             <input type="text" className="form-control" id="inputTelefone"
                                 name="telefone"
@@ -619,7 +618,7 @@ export default function Cadastro() {
                             </div>
                         </div>
 
-                        <div className="mb-sm-3 col-12 col-sm-2 col-xl-2 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-2 col-xl-2 px-3">
                             <label htmlFor="inputCep" className="form-label">CEP</label>
                             <input type="text" className="form-control" id="inputCep"
                                 maxlength={9}
@@ -633,7 +632,7 @@ export default function Cadastro() {
                             </div>
                         </div>
 
-                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-3">
                             <label htmlFor="inputCidade" className="form-label">Cidade</label>
                             <input type="text" className="form-control" id="inputCidade" name="cidade"
                                 value={dadosPessoais.cidade}
@@ -645,7 +644,7 @@ export default function Cadastro() {
                             </div>
                         </div>
 
-                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-2 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-2 px-3">
                             <label htmlFor="inputEstado" className="form-label">Estado</label>
                             <select className="form-select form-control" name="estado"
                                 value={dadosPessoais.estado}
@@ -665,7 +664,7 @@ export default function Cadastro() {
                         </div>
 
 
-                        <div className="mb-sm-3 col-12 col-sm-8 col-xl-6 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-8 col-xl-6 px-3">
                             <label htmlFor="inputLogradouro" className="form-label">Logradouro</label>
                             <input type="text" className="form-control" id="inputLogradouro"
                                 name="logradouro"
@@ -677,7 +676,7 @@ export default function Cadastro() {
                                 {validacoes.logradouro}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-2 col-xl-2 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-2 col-xl-2 px-3">
                             <label htmlFor="inputNumero" className="form-label">Número</label>
                             <input type="text" className="form-control" id="inputNumero"
                                 name="numero"
@@ -689,7 +688,7 @@ export default function Cadastro() {
                                 {validacoes.numero}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-3 col-xl-3 px-3">
                             <label htmlFor="inputComplemento" className="form-label">Complemento</label>
                             <input type="text" className="form-control" id="inputComplemento"
                                 name="complemento"
@@ -701,7 +700,7 @@ export default function Cadastro() {
                                 {validacoes.complemento}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-6 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-6 col-xl-3 px-3">
                             <label htmlFor="inputBairro" className="form-label">Bairro</label>
                             <input type="text" className="form-control" id="inputBairro" name="bairro"
                                 value={dadosPessoais.bairro}
@@ -714,7 +713,7 @@ export default function Cadastro() {
                         </div>
                     </div>
                     <div className="input-group">
-                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-3">
                             <label for="inputLogin" className="form-label">Login</label>
                             <input type="text" className="form-control" id="inputLogin"
                                 name="login"
@@ -725,7 +724,7 @@ export default function Cadastro() {
                                 {validacoes.login}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-1">
+                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-3">
                             <label for="inputSenha" className="form-label">Senha</label>
                             <input type="password" className="form-control" id="inputSenha"
                                 name="password"
@@ -736,7 +735,7 @@ export default function Cadastro() {
                                 {validacoes.senha}
                             </div>
                         </div>
-                        <div className="mb-sm-3 col-12 col-sm-4 col-xl-3 px-1">
+                        <div className="mb-3 col-12 col-sm-4 col-xl-3 px-3">
                             <label for="inputConfirmaSenha" className="form-label">Confirmar senha</label>
                             <input type="password" className="form-control" id="inputConfirmaSenha"
                                 name="repassword"
@@ -748,7 +747,7 @@ export default function Cadastro() {
                             </div>
                         </div>
                     </div>
-                    <div className='text-center'>
+                    <div className='text-center  px-3'>
                         <button type="submit" className="btn btn-outline-primary w-100 align-self-center mt-xxl-4" >Cadastrar</button>
                     </div>
                 </div>

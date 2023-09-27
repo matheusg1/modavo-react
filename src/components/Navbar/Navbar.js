@@ -68,7 +68,7 @@ export default function Navbar() {
                             </>
                         )}
                     </ul>
-                    <div className='d-flex'>
+                    <div className='d-flex d-none'>
                         <label for="switchDarkMode" className="me-2" >☾</label>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="switchDarkMode"
