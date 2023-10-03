@@ -428,7 +428,7 @@ export default function Cadastro() {
         else if (contemNumeroOuCaractereEspecial(dadosPessoais.senha)) {
             setValidacoes({ ...validacoes, senha: 'Senha deve ter apenas letras' });
         }
-        else if (dadosPessoais.senha.length != 8) {            
+        else if (dadosPessoais.senha.length != 8) {
             setValidacoes({ ...validacoes, senha: 'Senha deve ter 8 caracteres' });
         }
         else {
@@ -493,6 +493,16 @@ export default function Cadastro() {
             }
             else {
                 userValido = true;
+            }
+        }
+
+        for (let chave in dadosPessoais) {
+            if (dadosPessoais.hasOwnProperty(chave)) {
+                const valor = dadosPessoais[chave];
+                if (valor == '') {
+                    mostraMensagemToast('warning', 'Preencha os campos');
+                    return;
+                }
             }
         }
 

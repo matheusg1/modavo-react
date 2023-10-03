@@ -8,7 +8,7 @@ export function AuthContextProvider({ children }) {
     useEffect(() => {
         async function fetchUser() {            
             const usuarioLogado = localStorage.getItem('usuarioLogado')
-            console.log('oxe')
+            
             if (usuarioLogado) {
                 const usuarioLogadoJson = JSON.parse(usuarioLogado);
 
