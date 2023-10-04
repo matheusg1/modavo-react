@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import InputMask from 'react-input-mask';
 import axios from 'axios';
 import {
     cpfEhValido,
@@ -198,15 +199,14 @@ export default function Cadastro() {
     };
 
     const handleChangeCelular = (e) => {
-        const celular = e.target.value;
-        const celularFormatado = formataCelular(celular);
-        setDadosPessoais({ ...dadosPessoais, celular: celularFormatado });
+        const celular = e.target.value;        
+        setDadosPessoais({ ...dadosPessoais, celular: celular });
     };
 
     const handleChangeTelefone = (e) => {
         const telefone = e.target.value;
-        const telefoneFormatado = formataTelefone(telefone);
-        setDadosPessoais({ ...dadosPessoais, telefone: telefoneFormatado });
+        // const telefoneFormatado = formataTelefone(telefone);
+        setDadosPessoais({ ...dadosPessoais, telefone: telefone });
     };
 
     const handleChangeNomeMaterno = (e) => {
@@ -350,8 +350,12 @@ export default function Cadastro() {
     }
 
     const validaTelefone = () => {
+
         if (!dadosPessoais.telefone) {
             setValidacoes({ ...validacoes, telefone: mensagemCampoObrigatorio });
+        }
+        else if (dadosPessoais.telefone.includes('_')) {
+            setValidacoes({ ...validacoes, telefone: 'Corrija o campo' });
         } else {
             setValidacoes({ ...validacoes, telefone: '' });
         }
@@ -360,7 +364,11 @@ export default function Cadastro() {
     const validaCelular = () => {
         if (!dadosPessoais.celular) {
             setValidacoes({ ...validacoes, celular: mensagemCampoObrigatorio });
-        } else {
+        }
+        else if (dadosPessoais.celular.includes('_')) {
+            setValidacoes({ ...validacoes, celular: 'Corrija o campo' });
+        }
+        else {
             setValidacoes({ ...validacoes, celular: '' });
         }
     }
@@ -603,13 +611,17 @@ export default function Cadastro() {
 
                         <div className="mb-sm-3 col-12 col-sm-3 col-xl-2 px-3">
                             <label for="inputCelular" className="form-label">Celular</label>
-                            <input type="text" className="form-control " id="inputCelular"
+                            <InputMask
+                                id="inputCelular"
+                                className="form-control"
+                                mask="(+55)99-999999999"
                                 name="celular"
-                                maxLength={15}
+                                maskChar="_"
                                 value={dadosPessoais.celular}
                                 onChange={handleChangeCelular}
+                                placeholder="(+55)XX-XXXXXXXXX"
                                 onBlur={() => validaCelular()}
-                            />
+                            />                        
                             <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.celular}
                             </div>
@@ -617,16 +629,22 @@ export default function Cadastro() {
 
                         <div className="mb-sm-3 col-12 col-sm-3 col-xl-2 px-3">
                             <label for="inputTelefone" className="form-label">Telefone</label>
-                            <input type="text" className="form-control" id="inputTelefone"
+                            <InputMask
+                                id="inputTelefone"
+                                className="form-control"
+                                mask="(+55)99-99999999"
                                 name="telefone"
+                                maskChar="_"
                                 value={dadosPessoais.telefone}
                                 onChange={handleChangeTelefone}
+                                placeholder="(+55)XX-XXXXXXXX"
                                 onBlur={() => validaTelefone()}
                             />
                             <div className="texto-validacao pb-2 pb-sm-0">
                                 {validacoes.telefone}
                             </div>
                         </div>
+
 
                         <div className="mb-sm-3 col-12 col-sm-2 col-xl-2 px-3">
                             <label htmlFor="inputCep" className="form-label">CEP</label>
@@ -761,7 +779,7 @@ export default function Cadastro() {
                         <button type="submit" className="btn btn-outline-primary w-100 align-self-center mt-xxl-4" >Cadastrar</button>
                     </div>
                 </div>
-            </form>
+            </form >
         </>
     )
 }

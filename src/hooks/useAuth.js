@@ -11,9 +11,6 @@ export function AuthContextProvider({ children }) {
             
             if (usuarioLogado) {
                 const usuarioLogadoJson = JSON.parse(usuarioLogado);
-
-                console.log(localStorage.getItem('usuarioLogado'));
-
                 setUser(usuarioLogadoJson);
                 localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogadoJson));
             }

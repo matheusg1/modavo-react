@@ -70,7 +70,7 @@ export default function Navbar() {
                     </ul>
                     <div className='d-flex'>
                         <label for="switchDarkMode" className="me-2" >☾</label>
-                        <div className="form-check form-switch">
+                        <div className="form-check form-switch mb-0">
                             <input className="form-check-input" type="checkbox" role="switch" id="switchDarkMode"
                                 checked={checked}
                                 onChange={handleChange}

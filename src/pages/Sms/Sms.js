@@ -20,7 +20,7 @@ export default function Sms() {
 
         const numero = gerarNumeroAleatorio();
 
-        if(!celular.length){
+        if (!celular.length) {
             mostraMensagemToast('warning', 'Preencha o campo')
             return;
         }
@@ -28,10 +28,10 @@ export default function Sms() {
         if (numero < 6) {
             setCelular('')
             setMensagem('')
-            mostraMensagemToast('success', 'SMS enviado com sucesso')                                    
+            mostraMensagemToast('success', 'SMS enviado com sucesso')
         }
         else {
-            mostraMensagemToast('error', 'Falha ao enviar SMS')            
+            mostraMensagemToast('error', 'Falha ao enviar SMS')
         }
     }
 
@@ -62,6 +62,19 @@ export default function Sms() {
                 <img className="img-fluid col-1 col-md-4 col-lg-3 col-xxl-2 ms-4 d-none d-md-block"
                     src={imgSms}
                     alt='Ilustração de dois personagens trocando mensagens de texto.' />
+            </div>
+            <div className='container'>
+                <div className='d-flex'>
+                    <img className="img-fluid col-1 col-md-4 col-lg-3 col-xxl-2 ms-4 d-none d-md-block"
+                        src={imgSms} />
+                    <p>
+                        Com as poderosas APIs da Modavo, a gestão de campanhas SMS atinge um novo nível de eficiência. Através dessa plataforma inovadora, qualquer empresa pode enviar mensagens de texto ou voz personalizadas para seus clientes, prospects ou fornecedores de forma fácil e eficaz.
+
+                        Aproveite a segurança, velocidade e confiabilidade dessa solução para impulsionar o crescimento dos seus negócios e fortalecer o relacionamento com seus clientes.
+
+                        Não perca tempo, experimente agora mesmo e eleve suas comunicações empresariais a um novo patamar.
+                    </p>
+                </div>
             </div>
         </>
     )
