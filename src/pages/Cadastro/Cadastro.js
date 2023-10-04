@@ -5,8 +5,6 @@ import {
     cpfEhValido,
     contemNumeroOuCaractereEspecial,
     formataCpf,
-    formataCelular,
-    formataTelefone,
     formataCep,
     mostraMensagemToast,
 } from '../../services'
@@ -204,8 +202,7 @@ export default function Cadastro() {
     };
 
     const handleChangeTelefone = (e) => {
-        const telefone = e.target.value;
-        // const telefoneFormatado = formataTelefone(telefone);
+        const telefone = e.target.value;        
         setDadosPessoais({ ...dadosPessoais, telefone: telefone });
     };
 
@@ -351,22 +348,16 @@ export default function Cadastro() {
 
     const validaTelefone = () => {
 
-        if (!dadosPessoais.telefone) {
-            setValidacoes({ ...validacoes, telefone: mensagemCampoObrigatorio });
-        }
-        else if (dadosPessoais.telefone.includes('_')) {
-            setValidacoes({ ...validacoes, telefone: 'Corrija o campo' });
+        if (dadosPessoais.telefone.includes('_')) {
+            setValidacoes({ ...validacoes, telefone: 'Preencha o campo' });
         } else {
             setValidacoes({ ...validacoes, telefone: '' });
         }
     }
 
     const validaCelular = () => {
-        if (!dadosPessoais.celular) {
-            setValidacoes({ ...validacoes, celular: mensagemCampoObrigatorio });
-        }
-        else if (dadosPessoais.celular.includes('_')) {
-            setValidacoes({ ...validacoes, celular: 'Corrija o campo' });
+        if (dadosPessoais.celular.includes('_')) {
+            setValidacoes({ ...validacoes, celular: 'Preencha o campo' });
         }
         else {
             setValidacoes({ ...validacoes, celular: '' });
@@ -649,7 +640,7 @@ export default function Cadastro() {
                         <div className="mb-sm-3 col-12 col-sm-2 col-xl-2 px-3">
                             <label htmlFor="inputCep" className="form-label">CEP</label>
                             <input type="text" className="form-control" id="inputCep"
-                                maxlength={9}
+                                maxLength={9}
                                 name="cep"
                                 value={dadosPessoais.cep}
                                 onChange={handleChangeCep}

@@ -31,7 +31,7 @@ export default function Login() {
 
         if (!values.login || !values.senha) {
             Toast.fire({
-                icon: 'error',
+                icon: 'warning',
                 title: 'Preencha os campos'
             })
             return;

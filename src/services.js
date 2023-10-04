@@ -84,31 +84,19 @@ export const formataCelular = (input) => {
 };
 
 export const formataTelefone = (input) => {
-    input = input.replace(/\D/g, '');
+    const cleanedInput = input.replace(/\D/g, '');
+    let formattedInput = '';
 
-    // Adicione a máscara "(+55)XX-XXXXXXXX"
-    if (input.length <= 2) {
-        input = `(+55)${input}`;
-    } else if (input.length <= 4) {
-        input = `(+55)${input.slice(0, 2)}-${input.slice(2)}`;
+    if (cleanedInput.length <= 2) {
+        formattedInput = cleanedInput;
+    } else if (cleanedInput.length <= 6) {
+        formattedInput = `(${cleanedInput.slice(0, 2)}) ${cleanedInput.slice(2)}`;
     } else {
-        input = `(+55)${input.slice(0, 2)}-${input.slice(2, 10)}`;
+        formattedInput = `(${cleanedInput.slice(0, 2)}) ${cleanedInput.slice(2, 6)}-${cleanedInput.slice(6, 10)}`;
     }
-    return input;
-    // const cleanedInput = input.replace(/\D/g, '');
 
-
-    // let formattedInput = '';
-
-    // if (cleanedInput.length === 10) {
-    //     formattedInput = `(+55)${cleanedInput.slice(0, 2)}-${cleanedInput.slice(2)}`;
-    // } else {
-    //     formattedInput = cleanedInput;
-    // }
-
-    // return formattedInput;
+    return formattedInput;
 };
-
 
 export const formataCep = (input) => {
     const cleanedInput = input.replace(/\D/g, '');
@@ -141,7 +129,7 @@ export const Toast = Swal.mixin({
     }
 })
 
-export const mostraMensagemToast = (icon, mensagem) => {
+export const mostraMensagemToast = (icon, mensagem) =>{
     Toast.fire({
         icon: icon,
         title: mensagem
