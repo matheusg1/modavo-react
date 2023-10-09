@@ -15,7 +15,7 @@ export default function Index() {
                     <img src={imgRede} alt='Ilustração de um celular com representações de mídias sociais, SMS e estatísticas.' className='img-fluid d-block d-sm-none' />
                     <div className='d-flex flex-column justify-content-center'>
                         <h2 className='display-5 text-primary-emphasis fw-bold mb-2'>Integra</h2>
-                        <div className='fs-5 fw-light col-9'>Comunique-se com confiança e alcance seus clientes de forma segura através do nosso CPaaS. Uma solução completa para integrar canais de comunicação, como SMS, autenticação de 2 fatores, Número Máscara e muito mais. </div>
+                        <div className='fs-4 fw-light col-9'>Comunique-se com confiança e alcance seus clientes de forma segura através do nosso CPaaS. Uma solução completa para integrar canais de comunicação, como SMS, autenticação de 2 fatores, Número Máscara e muito mais. </div>
                     </div>
                     <img src={imgRede} alt='Ilustração de um celular com representações de mídias sociais, SMS e estatísticas.' className='img-fluid d-none d-sm-block' />
                 </div>

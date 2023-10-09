@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import imgSms from '../../img/img-sms.png';
+import imgSms2 from '../../img/img-campanha.png';
 import {
     formataCelular,
     gerarNumeroAleatorio,
@@ -37,12 +38,12 @@ export default function Sms() {
 
     return (
         <>
-            <div className='d-flex flex-column flex-md-row align-items-center justify-content-center flex-fill'>
+            <div className='d-flex flex-column flex-md-row align-items-center justify-content-center flex-fill mt-4 mt-md-0'>
                 <img className="img-fluid col-10 col-sm-6 d-block d-md-none" src={imgSms}></img>
                 <div className='col-11 col-sm-11 col-md-5'>
                     <h2 className='fs-3 fw-bold text-primary-emphasis mb-md-2'>SMS</h2>
-                    <div className='fs-6 fw-medium col-12 col-md-12'>
-                        Envie SMS avulso de forma fácil e rápida para se conectar com seus clientes. Controle total em suas mensagens.</div>
+                    <p className='fs-6 fw-medium col-12 col-md-12'>
+                        Envie SMS avulso de forma fácil e rápida para se conectar com seus clientes. Controle total em suas mensagens.</p>
                     <div class="input-group">
                         <textarea class="form-control mt-4 mb-3" aria-label="Texto" placeholder="Digite a mensagem"
                             value={mensagem}
@@ -64,16 +65,14 @@ export default function Sms() {
                     alt='Ilustração de dois personagens trocando mensagens de texto.' />
             </div>
             <div className='container'>
-                <div className='d-flex'>
-                    <img className="img-fluid col-1 col-md-4 col-lg-3 col-xxl-2 ms-4 d-none d-md-block"
-                        src={imgSms} />
-                    <p>
-                        Com as poderosas APIs da Modavo, a gestão de campanhas SMS atinge um novo nível de eficiência. Através dessa plataforma inovadora, qualquer empresa pode enviar mensagens de texto ou voz personalizadas para seus clientes, prospects ou fornecedores de forma fácil e eficaz.
-
+                <div className='d-flex flex-column flex-md-row align-items-center mb-3 mb-md-5'>
+                    <img className="img-fluid col-9 col-md-4 col-lg-3 col-xxl-3 ms-4 d-md-block"
+                        src={imgSms2} />
+                    <div className='col-11 col-md-8 fs-6 fw-medium'>
+                        Com as poderosas APIs da Integra, a gestão de campanhas SMS atinge um novo nível de eficiência. Através dessa plataforma inovadora, qualquer empresa pode enviar mensagens de texto ou voz personalizadas para seus clientes, prospects ou fornecedores de forma fácil e eficaz.
                         Aproveite a segurança, velocidade e confiabilidade dessa solução para impulsionar o crescimento dos seus negócios e fortalecer o relacionamento com seus clientes.
-
                         Não perca tempo, experimente agora mesmo e eleve suas comunicações empresariais a um novo patamar.
-                    </p>
+                    </div>
                 </div>
             </div>
         </>

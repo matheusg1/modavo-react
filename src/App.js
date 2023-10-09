@@ -10,7 +10,7 @@ export default function App() {
         <div className="min-vh-100 d-flex flex-column">
             <Navbar />
             <AppRoutes />
-            <footer className='footer-custom border-top d-flex flex-column flex-md-row justify-content-between mx-5 pt-1 pb-3'>
+            <footer className='footer-custom border-top d-flex flex-column flex-md-row justify-content-between mx-0 mx-md-5 pt-3 pb-3'>
                 <div className='d-flex flex-column pb-2 pb-md-0'>
                     <div className=''>Desenvolvido por <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://github.com/matheusg1" target='_blank'>Matheus G.</a> e <a className='link-offset-2 link-underline link-underline-opacity-0 text-primary-emphasis' href="https://www.linkedin.com/in/duarrte/" target='_blank'>Luan Souza</a></div>                    
                 </div>
